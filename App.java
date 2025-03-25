@@ -25,7 +25,7 @@ public class App {
 			if(!ficheroConfiguracion.exists()){
 				ficheroConfiguracion.createNewFile();
 				System.out.println("Fichero de configuración creado correctamente");
-				//crearDirectorios()
+				crearDirectorios();
 				System.out.println("Directorios de configuración creados correctamente");
 			}
 			System.out.println("Ok");
@@ -38,17 +38,20 @@ public class App {
 
 	/**
 	 * Método para crear un subdirectorios.
-	 * @param directorio Es el directorio donde se crearan los subdirectorios.
-	 * @param nombreSubdirectorio Es el nombre que se le dará al subdirectorio creado.
 	 */
-	public static void crearDirectorios(Path directorio, String nombreSubdirectorio) {
-		Path subdirectorio = directorio.resolve(nombreSubdirectorio);
+	public static void crearDirectorios() {
+		Path pathActual = Paths.get("");
+		Path directorioEscenario = pathActual.resolve("escenario");
+		Path directorioJugador = pathActual.resolve("jugador");
+		Path directorioPartida = pathActual.resolve("partida");
 
 		try {
-			Files.createDirectory(subdirectorio);
-			System.out.println("El directorio " + nombreSubdirectorio + " ha sido creado.");
+			Files.createDirectory(directorioEscenario);
+			Files.createDirectory(directorioJugador);
+			Files.createDirectory(directorioPartida);
+			System.out.println("Los directorios han sido creado.");
 		} catch(IOException e) {
-			System.out.println("No se pudo crear el directorio " + nombreSubdirectorio);
+			System.out.println("No se pudo crear los directorios.");
 		}
 	}
 }
