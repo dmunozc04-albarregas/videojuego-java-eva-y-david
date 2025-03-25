@@ -1,14 +1,39 @@
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.File;
 /**
- * Clase principal que cre un directorio de configuración y sbdirectorios.
+ * Clase principal que crea un directorio de configuración y subdirectorios.
  * @autor David Muñoz - Eva Retamar
  * Licencia GPL v3. Fecha 03 2025
  * 
  */
 public class App {
 	public static void main(String[] args) {
+		comprobarFicheroConfiguracion();
+	}
 
+	/**
+	 * 
+	 */
+	public static void comprobarFicheroConfiguracion() {
+		File ficheroConfiguracion = new File("config.txt");
+		Path pathActual = Paths.get("");
+
+		try{
+			if(!ficheroConfiguracion.exists()){
+				ficheroConfiguracion.createNewFile();
+				System.out.println("Fichero de configuración creado");
+				//crearDirectorios()
+				System.out.println("Directorios de configuración creados");
+			}
+			System.out.println("Ok");
+		} 
+		catch (IOException e){
+			System.out.println("Algo ha ido mal");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -21,7 +46,7 @@ public class App {
 
 		try {
 			Files.createDirectory(subdirectorio);
-			System.out.println("El dorectorio " + nombreSubdirectorio + " ha sido creado.");
+			System.out.println("El directorio " + nombreSubdirectorio + " ha sido creado.");
 		} catch(IOException e) {
 			System.out.println("No se pudo crear el directorio " + nombreSubdirectorio);
 		}
