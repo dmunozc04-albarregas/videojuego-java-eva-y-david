@@ -24,9 +24,9 @@ public class App {
 		try{
 			if(!ficheroConfiguracion.exists()){
 				ficheroConfiguracion.createNewFile();
-				System.out.println("Fichero de configuración creado");
+				System.out.println("Fichero de configuración creado correctamente");
 				//crearDirectorios()
-				System.out.println("Directorios de configuración creados");
+				System.out.println("Directorios de configuración creados correctamente");
 			}
 			System.out.println("Ok");
 		} 
