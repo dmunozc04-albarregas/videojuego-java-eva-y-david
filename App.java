@@ -15,7 +15,7 @@ public class App {
 	}
 
 	/**
-	 * 
+	 * Método para comprobar si existe el fichero de configuración
 	 */
 	public static void comprobarFicheroConfiguracion() {
 		File ficheroConfiguracion = new File("config.txt");
