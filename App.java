@@ -1,8 +1,8 @@
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.io.File;
 /**
  * Clase principal que crea un directorio de configuración y subdirectorios.
  * @autor David Muñoz - Eva Retamar
@@ -26,7 +26,6 @@ public class App {
 				ficheroConfiguracion.createNewFile();
 				System.out.println("Fichero de configuración creado correctamente");
 				crearDirectorios();
-				System.out.println("Directorios de configuración creados correctamente");
 			}
 			System.out.println("Ok");
 		} 
@@ -41,7 +40,7 @@ public class App {
 	 */
 	public static void crearDirectorios() {
 		Path pathActual = Paths.get("");
-		Path directorioEscenario = pathActual.resolve("escenario");
+		Path directorioEscenario = pathActual.resolve("escenarios");
 		Path directorioJugador = pathActual.resolve("jugador");
 		Path directorioPartida = pathActual.resolve("partida");
 
@@ -49,7 +48,7 @@ public class App {
 			Files.createDirectory(directorioEscenario);
 			Files.createDirectory(directorioJugador);
 			Files.createDirectory(directorioPartida);
-			System.out.println("Los directorios han sido creado.");
+			System.out.println("Directorios de configuración creados correctamente");
 		} catch(IOException e) {
 			System.out.println("No se pudo crear los directorios.");
 		}
