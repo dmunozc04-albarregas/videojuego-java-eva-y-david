@@ -5,6 +5,7 @@ public class Controlador {
     private Vista vista;
     private Jugador jugador;
     private static String nombreUsuario;
+    private static String correo;
     //private Escenario escenario;
 
     public Controlador(Scanner teclado) {
@@ -22,8 +23,7 @@ public class Controlador {
     	} while (nombreUsuario.isEmpty());
 	}
 
-	public static String pedirCorreo() {
-        String correo;
+	public static void pedirCorreo() {
     	do {
         	System.out.print("No estás registrado. Introduce tu correo: ");
         	correo = teclado.nextLine();
@@ -31,35 +31,20 @@ public class Controlador {
             	System.out.println("Correo no válido. Asegúrate de que contiene '@'.");
         	}
     	} while (!correo.contains("@"));
-    	return correo;
 	}
 
     public void iniciarJuego() {
     	pedirNombreUsuario();
+        pedirCorreo();
+        jugador.crearJugador(nombreUsuario, correo);
     	
-    	if(!this.jugador.existeJugador()) {
-    		String correo = pedirCorreo();
+    	/*if(!this.jugador.comprobarExistenciaJugador(nombreUsuario)) {
+    		pedirCorreo();
     		jugador.crearJugador(nombreUsuario, correo);
-    		System.out.println("Jugador registrado correctamente.");
-        }
+        }*/
     }
 
-    public void cargarEscenario(Path rutaEscenario) {
-        List<String> contenidoEscenario;
-        try {
-            InputStream caracterEntrada = Files.newInputStream(rutaEscenario);
-
-            ObjectInputStream flujoEntrada = new ObjectInputStream(caracterEntrada);
-
-            contenidoEscenario = (List<String>) flujoEntrada.readObject();
-
-            for(String caracter : contenidoEscenario) {
-                System.out.println(caracter);
-            }
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
+    /*public void cargarEscenario(Path rutaEscenario) {
+        
+    }*/
 }
