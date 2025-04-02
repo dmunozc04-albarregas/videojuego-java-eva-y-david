@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.nio.file.DirectoryStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
@@ -32,7 +33,9 @@ public class Jugador implements Serializable{
        		DirectoryStream<Path> flujoDatos = Files.newDirectoryStream(pathJugadores);
 
        		for(Path fichero : flujoDatos){
-       			if(fichero.contains(nombreUsuario)){
+				String nombreFichero = fichero.getFileName().toString();
+
+       			if(nombreFichero.contains(nombreUsuario)){
        				return true;
        			}
        		}

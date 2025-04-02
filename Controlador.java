@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Controlador {
     private static Scanner teclado;
@@ -39,14 +41,21 @@ public class Controlador {
     }
 
     public void iniciarJuego() {
+        Path rutaEscenario1 = Paths.get("escenarios/escenario1.txt");
+        Path rutaEscenario2 = Paths.get("escenarios/escenario2.txt");
+        Path rutaEscenario3 = Paths.get("escenarios/escenario3.txt");
+        Path rutaEscenario4 = Paths.get("escenarios/escenario4.txt");
+
+
         pedirNombreUsuario();
-        pedirCorreo();
-        jugador.crearJugador(jugador.getNombreUsuario(), jugador.getEmail());
-        
-        /*if(!this.jugador.comprobarExistenciaJugador(nombreUsuario)) {
+        if(!this.jugador.comprobarExistenciaJugador(jugador.getNombreUsuario())) {
             pedirCorreo();
-            jugador.crearJugador(nombreUsuario, correo);
-        }*/
+            jugador.crearJugador(jugador.getNombreUsuario(), jugador.getEmail());
+        }
+        vista.cargarEscenario(rutaEscenario1);
+        vista.cargarEscenario(rutaEscenario2);
+        vista.cargarEscenario(rutaEscenario3);
+        vista.cargarEscenario(rutaEscenario4);
     }
 
     
