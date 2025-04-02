@@ -49,7 +49,5 @@ public class Controlador {
         }*/
     }
 
-    /*public void cargarEscenario(Path rutaEscenario) {
-        
-    }*/
+    
 }
