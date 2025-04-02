@@ -15,6 +15,12 @@ public class Jugador implements Serializable{
 	private String nombreUsuario;
 	private String email;
 
+
+	public Jugador(){
+		this.nombreUsuario = nombreUsuario;
+		this.email = email;
+	}
+
 	public Jugador(String nombreUsuario, String email){
 		this.nombreUsuario = nombreUsuario;
 		this.email = email;
@@ -42,5 +48,21 @@ public class Jugador implements Serializable{
         catch(Exception e){
         	e.printStackTrace();
         }
+	}
+
+	public void setNombreUsuario(String nombreUsuario){
+		this.nombreUsuario = nombreUsuario;
+	}
+
+	public void setEmail(String email){
+		this.email = email;
+	}
+
+	public String getNombreUsuario(){
+		return nombreUsuario;
+	}
+
+	public String getEmail(){
+		return email;
 	}
 }
