@@ -7,7 +7,7 @@ public class Vista {
 	
 	public void cargarEscenarios(List<Path> rutasEscenarios) {
         for (Path rutaEscenario : rutasEscenarios) {
-            System.out.println("\n rutaEscenario.getFileName()" + " ===");
+            System.out.println("\n" + "===" + rutaEscenario.getFileName() + " ===");
 
             int obstaculos = 0;
             int espacios = 0;
