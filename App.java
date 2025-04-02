@@ -68,4 +68,6 @@ public class App {
         System.out.println("Instanciando jugadores...");
         // Aquí deberías implementar la lógica para crear o cargar jugadores.
     }
+
 }
+
