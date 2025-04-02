@@ -14,10 +14,11 @@ public class App {
     
     private static Scanner teclado = new Scanner(System.in);
 
+
     public static void main(String[] args) {
         comprobarFicheroConfiguracion();
-            
-        Controlador controlador = new Controlador(teclado);
+        Jugador jugador = new Jugador();
+        Controlador controlador = new Controlador(teclado, jugador);
         controlador.iniciarJuego();
     }
 
