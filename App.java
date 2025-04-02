@@ -10,14 +10,18 @@ import java.nio.file.Paths;
  * 
  */
 public class App {
+
+	private static Jugador jugador = new Jugador(null, null)
+
 	public static void main(String[] args) {
-		comprobarFicheroConfiguracion();
+		//comprobarFicheroConfiguracion();
+		instanciarJugadores();
 	}
 
 	/**
 	 * Método para comprobar si existe el fichero de configuración
 	 */
-	public static void comprobarFicheroConfiguracion() {
+	private static void comprobarFicheroConfiguracion() {
 		File ficheroConfiguracion = new File("config.txt");
 		Path pathActual = Paths.get("");
 
@@ -38,7 +42,7 @@ public class App {
 	/**
 	 * Método para crear un subdirectorios.
 	 */
-	public static void crearDirectorios() {
+	private static void crearDirectorios() {
 		Path pathActual = Paths.get("");
 		Path directorioEscenario = pathActual.resolve("escenarios");
 		Path directorioJugador = pathActual.resolve("jugador");
