@@ -34,7 +34,6 @@ public class App {
                 System.out.println("Fichero de configuración creado correctamente");
                 crearDirectorios();
             }
-            System.out.println("Ok");
         } catch (IOException e) {
             System.out.println("Algo ha ido mal");
             e.printStackTrace();
