@@ -3,6 +3,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.File;
+import java.util.Scanner;
 /**
  * Clase principal que crea un directorio de configuración y subdirectorios.
  * @autor David Muñoz - Eva Retamar
@@ -10,8 +11,12 @@ import java.io.File;
  * 
  */
 public class App {
+	static Scanner teclado = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		comprobarFicheroConfiguracion();
+		/*Controlador controlador = new Controlador();
+		controlador.iniciarJuego();*/
 	}
 
 	/**
@@ -19,7 +24,6 @@ public class App {
 	 */
 	public static void comprobarFicheroConfiguracion() {
 		File ficheroConfiguracion = new File("config.txt");
-		Path pathActual = Paths.get("");
 
 		try{
 			if(!ficheroConfiguracion.exists()){
@@ -54,4 +58,5 @@ public class App {
 			System.out.println("No se pudo crear los directorios.");
 		}
 	}
+
 }
