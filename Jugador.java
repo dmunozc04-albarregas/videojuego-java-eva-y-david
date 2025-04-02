@@ -35,7 +35,7 @@ public class Jugador implements Serializable{
        		for(Path fichero : flujoDatos){
 				String nombreFichero = fichero.getFileName().toString();
 
-       			if(nombreFichero.contains(nombreUsuario)){
+       			if(nombreFichero.equals(nombreUsuario)){
        				return true;
        			}
        		}
