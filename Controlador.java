@@ -4,18 +4,31 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Clase controlador que gestiona la interacción entre el usuario, la vista y el modelo.
+ * @author David Muñoz - Eva Retamar
+ * Licencia GPL v3. Fecha 03 2025
+ */
 public class Controlador {
     private static Scanner teclado;
     private Vista vista;
     private Jugador jugador;
     //private Escenario escenario;
 
+    /**
+     * Contructor de la clase Controlador.
+     * @param teclado Objeto Scanner para la entrada de datos del usuario.
+     * @param jugador Instancia de la case Jugador para gestionar el usuario.
+     */
     public Controlador(Scanner teclado, Jugador jugador) {
         this.vista = new Vista();
         this.teclado = teclado;
         this.jugador = jugador;
     }
 
+    /**
+     * Solicita al usuario su nombre y lo almacena en el objeto Jugador.
+     */
     public void pedirNombreUsuario() {
         String nombreUsuario;
         do {
@@ -29,6 +42,10 @@ public class Controlador {
         jugador.setNombreUsuario(nombreUsuario); 
     }
 
+    /**
+     * Solicita al usuario su correo y lo almacena en el objeto Jugador.
+     * Se valida que el correo contenga '@'.
+     */
     public void pedirCorreo() {
         String correo;
         do {
@@ -42,13 +59,11 @@ public class Controlador {
         jugador.setEmail(correo);
     }
 
+     /**
+     * Inicia el flujo del juego: pide el nombre del usuario, verifica si está registrado
+     * y, en caso contrario, le solicita el correo y lo guarda. Luego, carga los escenarios.
+     */
     public void iniciarJuego() {
-        /*Path rutaEscenario1 = Paths.get("escenarios/escenario1.txt");
-        Path rutaEscenario2 = Paths.get("escenarios/escenario2.txt");
-        Path rutaEscenario3 = Paths.get("escenarios/escenario3.txt");
-        Path rutaEscenario4 = Paths.get("escenarios/escenario4.txt");
-        */
-
         pedirNombreUsuario();
         if(!this.jugador.comprobarExistenciaJugador(jugador.getNombreUsuario())) {
             pedirCorreo();
@@ -62,11 +77,6 @@ public class Controlador {
         rutasEscenarios.add(Paths.get("escenarios/escenario4.txt"));
         
         vista.cargarEscenarios(rutasEscenarios);
-        
-        /*vista.cargarEscenario(rutaEscenario1);
-        vista.cargarEscenario(rutaEscenario2);
-        vista.cargarEscenario(rutaEscenario3);
-        vista.cargarEscenario(rutaEscenario4);*/
     }
 
     
