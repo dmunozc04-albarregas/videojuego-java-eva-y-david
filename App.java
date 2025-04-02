@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * Clase principal que crea un directorio de configuración y subdirectorios.
- * @autor David Muñoz - Eva Retamar
+ * @author David Muñoz - Eva Retamar
  * Licencia GPL v3. Fecha 03 2025
  */
 public class App {
