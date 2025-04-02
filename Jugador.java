@@ -28,14 +28,14 @@ public class Jugador implements Serializable{
 	}
 
 	public boolean comprobarExistenciaJugador(String nombreUsuario){
-       Path pathJugadores = Paths.get("");
+       Path pathJugadores = Paths.get("jugador");
        try{
        		DirectoryStream<Path> flujoDatos = Files.newDirectoryStream(pathJugadores);
 
        		for(Path fichero : flujoDatos){
 				String nombreFichero = fichero.getFileName().toString();
 
-       			if(nombreFichero.contains(nombreUsuario)){
+       			if(nombreFichero.equals(nombreUsuario + ".bin")){
        				return true;
        			}
        		}

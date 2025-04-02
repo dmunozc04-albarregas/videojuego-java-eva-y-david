@@ -16,7 +16,7 @@ public class Vista {
 	 */
 	public void cargarEscenarios(List<Path> rutasEscenarios) {
         for (Path rutaEscenario : rutasEscenarios) {
-            System.out.println("\n=== Cargando: " + rutaEscenario.getFileName() + " ===");
+            System.out.println("\n" + "===" + rutaEscenario.getFileName() + " ===");
 
             int obstaculos = 0;
             int espacios = 0;
@@ -25,6 +25,7 @@ public class Vista {
                 List<String> archivoEscenario = Files.readAllLines(rutaEscenario);
 
                 for (String linea : archivoEscenario) {
+                    System.out.println(linea);
                     for (char caracter : linea.toCharArray()) {
                         if (caracter == '¬') {
                             obstaculos++;
