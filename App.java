@@ -12,15 +12,13 @@ import java.util.Scanner;
  */
 public class App {
     
-    private static Jugador jugador = new Jugador(null, null);
-    static Scanner teclado = new Scanner(System.in);
+    private static Scanner teclado = new Scanner(System.in);
 
     public static void main(String[] args) {
         comprobarFicheroConfiguracion();
-        instanciarJugadores();
-        
-        // Controlador controlador = new Controlador();
-        // controlador.iniciarJuego();
+            
+        Controlador controlador = new Controlador(teclado);
+        controlador.iniciarJuego();
     }
 
     /**
@@ -59,14 +57,6 @@ public class App {
         } catch (IOException e) {
             System.out.println("No se pudieron crear los directorios.");
         }
-    }
-
-    /**
-     * Método para instanciar jugadores.
-     */
-    private static void instanciarJugadores() {
-        System.out.println("Instanciando jugadores...");
-        // Aquí deberías implementar la lógica para crear o cargar jugadores.
     }
 
 }

@@ -1,7 +1,8 @@
-/*public class Vista {
+public class Vista {
+	private Controlador contrlador;
 	
-	public void mostrarEscenario(String escenario) {
-		System.out.prinln(escenario);
-		System.out.prinl("\nESCENARIO CARGADO");
+	public void mostrarEscenario(File escenario) {
+		System.out.println(escenario);
+		System.out.println("\nESCENARIO CARGADO");
 	}
-}*/
+}
