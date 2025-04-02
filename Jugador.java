@@ -26,9 +26,22 @@ public class Jugador implements Serializable{
 		this.email = email;
 	}
 
-	/*public void comprobarExistenciaJugador(String nombreUsuario){
-       
-    }*/
+	public boolean comprobarExistenciaJugador(String nombreUsuario){
+       Path pathJugadores = Paths.get("");
+       try{
+       		DirectoryStream<Path> flujoDatos = Files.newDirectoryStream(pathJugadores);
+
+       		for(Path fichero : flujoDatos){
+       			if(fichero.contains(nombreUsuario)){
+       				return true;
+       			}
+       		}
+       }
+       catch(Exception e){
+       	e.printStackTrace();
+       }
+       return false;
+    }
 
 	public void crearJugador(String nombreUsuario, String email){
 		List<Jugador> contenidoFicheroJugador = new ArrayList<>();
