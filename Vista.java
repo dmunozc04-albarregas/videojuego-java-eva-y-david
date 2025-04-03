@@ -29,14 +29,14 @@ public class Vista {
                     for (char caracter : linea.toCharArray()) {
                         if (caracter == '¬') {
                             obstaculos++;
-                        } else if (caracter == ' ') {
+                        } else if (caracter == '|') {
                             espacios++;
                         }
                     }
                 }
 
                 System.out.println("Obstáculos ('¬'): " + obstaculos);
-                System.out.println("Espacios (' '): " + espacios);
+                System.out.println("Espacios ('|'): " + espacios);
 
             } catch (IOException e) {
 				e.printStackTrace();            
