@@ -3,6 +3,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Clase controlador que gestiona la interacción entre el usuario, la vista y el modelo.
@@ -70,13 +72,30 @@ public class Controlador {
             jugador.crearJugador(jugador.getNombreUsuario(), jugador.getEmail());
         }
 
-        List<Path> rutasEscenarios = new ArrayList<>();
-        rutasEscenarios.add(Paths.get("escenarios/escenario1.txt"));
-        rutasEscenarios.add(Paths.get("escenarios/escenario2.txt"));
-        rutasEscenarios.add(Paths.get("escenarios/escenario3.txt"));
-        rutasEscenarios.add(Paths.get("escenarios/escenario4.txt"));
+        Integer opcion = solicitarOpcion();
+
+        Map<String,Path> rutasEscenarios = new HashMap<>();
+        rutasEscenarios.put("nivel 1",Paths.get("escenarios/escenario1.txt"));
+        rutasEscenarios.put("nivel 2",Paths.get("escenarios/escenario2.txt"));
+        rutasEscenarios.put("nivel 3",Paths.get("escenarios/escenario3.txt"));
+        rutasEscenarios.put("nivel 4",Paths.get("escenarios/escenario4.txt"));
         
-        vista.cargarEscenarios(rutasEscenarios);
+        Path rutaEscenarioElegido = null;
+        for(String clave : rutasEscenarios.keySet()){
+            if(rutasEscenarios.containsKey("nivel " + opcion)){
+                rutaEscenarioElegido = rutasEscenarios.get("nivel " + opcion);
+            }
+        }
+
+        vista.cargarEscenarios(rutaEscenarioElegido, opcion);
+    }
+
+    public Integer solicitarOpcion(){
+        Integer opcion = 0;
+        System.out.print("Eliga un nivel: ");
+        opcion = Integer.valueOf(teclado.nextLine());
+
+        return opcion;
     }
 
     

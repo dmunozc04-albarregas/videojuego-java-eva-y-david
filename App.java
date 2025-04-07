@@ -20,6 +20,7 @@ public class App {
         Jugador jugador = new Jugador();
         Controlador controlador = new Controlador(teclado, jugador);
         controlador.iniciarJuego();
+        teclado.close();
     }
 
     /**
