@@ -46,7 +46,7 @@ public class Vista {
                         }
                         //Agregamos el símbolo a la fila tanta veces como indique cantidad. 
                         for(int i = 0; i < cantidad; i++) {
-                            fila.append(simbolo); //Añadimos le símboo a la fila.
+                            fila.append(simbolo); //Método de la clase StringBuilder. Añadimos el símboo a la fila.
                         }
                     }
                     System.out.println(fila.toString());
