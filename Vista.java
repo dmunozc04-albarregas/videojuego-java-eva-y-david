@@ -11,10 +11,10 @@ import java.util.List;
 public class Vista {
 	
 	/**
-	 * Método para cargar y analizar varios escenarios.
+	 * Método para cargar varios escenarios.
 	 * @param rutaEscenarios Lista de rutas de los arhivos de escenarios.
 	 */
-	public void cargarEscenarios(List<Path> rutasEscenarios) {
+    public void cargarEscenarios(List<Path> rutasEscenarios) {
         for (Path rutaEscenario : rutasEscenarios) {
             System.out.println("\n" + "===" + rutaEscenario.getFileName() + " ===");
 
@@ -25,22 +25,35 @@ public class Vista {
                 List<String> archivoEscenario = Files.readAllLines(rutaEscenario);
 
                 for (String linea : archivoEscenario) {
-                    System.out.println(linea);
-                    for (char caracter : linea.toCharArray()) {
-                        if (caracter == '¬') {
-                            obstaculos++;
-                        } else if (caracter == '|') {
-                            espacios++;
+                    String[] partes = linea.split(" ");
+                    //Creamos un StringBuilder para construir la fila visual del escenario.
+                    StringBuilder fila = new StringBuilder();
+
+                    for(String parte : partes) {
+                        int cantidad = Integer.valueOf(parte.substring(0, parte.length() - 1));
+                        char tipo = parte.charAt(parte.length() - 1);
+
+                        char simbolo;
+
+                        if(tipo == 'E') {
+                            simbolo = '|';
+                            espacios += cantidad;
+                        } else if(tipo == 'O') {
+                            simbolo = '¬';
+                            obstaculos += cantidad;
+                        } else {
+                            continue;
+                        }
+                        //Agregamos el símbolo a la fila tanta veces como indique cantidad. 
+                        for(int i = 0; i < cantidad; i++) {
+                            fila.append(simbolo); //Añadimos le símboo a la fila.
                         }
                     }
+                    System.out.println(fila.toString());
                 }
-
-                System.out.println("Obstáculos ('¬'): " + obstaculos);
-                System.out.println("Espacios ('|'): " + espacios);
-
             } catch (IOException e) {
-				e.printStackTrace();            
-			}
+                e.printStackTrace();            
+            }
         }
     }
 }
