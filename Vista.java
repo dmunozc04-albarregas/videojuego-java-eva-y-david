@@ -14,9 +14,8 @@ public class Vista {
 	 * Método para cargar varios escenarios.
 	 * @param rutaEscenarios Lista de rutas de los arhivos de escenarios.
 	 */
-    public void cargarEscenarios(List<Path> rutasEscenarios) {
-        for (Path rutaEscenario : rutasEscenarios) {
-            System.out.println("\n" + "===" + rutaEscenario.getFileName() + " ===");
+    public void cargarEscenarios(Path rutaEscenario, Integer opcion) {
+            System.out.println("\n=== " + "Nivel " + opcion + " ===");
 
             int obstaculos = 0;
             int espacios = 0;
@@ -53,7 +52,6 @@ public class Vista {
                 }
             } catch (IOException e) {
                 e.printStackTrace();            
-            }
         }
     }
 }
