@@ -87,8 +87,45 @@ public class Controlador {
         }
 
         vista.cargarEscenarios(rutaEscenarioElegido, opcion);
+        vista.posicionarJugador();
+        Integer vidas = 3;
+        do{
+            vista.mostrarMapaConJugador();
+            obtenerTecla();
+        }
+        while(vidas > 0);
     }
 
+    /**
+     * Método que recoge la tecla introducida por el usuario para poder saber a que posición mover el usuario.
+     * Adicionalmente, comprueba que las teclas sean las indicadas y que no se introduzca un espacio.
+     */
+    public void obtenerTecla(){
+        String teclaString = " ";
+
+        do {
+            System.out.print("Pulse para mover al jugador (W,A,S,D) y ENTER: ");
+            teclaString = teclado.nextLine().toLowerCase();
+
+            if (teclaString.isEmpty()) {
+                System.out.println("¡No se ha introducido ninguna tecla! Por favor, ingrese W, A, S, o D.");
+            }
+        }while((teclaString.isEmpty()));
+
+        if (!teclaString.isEmpty()) {
+            char tecla = teclaString.charAt(0);
+
+            if (tecla == 'w' || tecla == 'a' || tecla == 's' || tecla == 'd') {
+                vista.moverJugador(tecla);
+            } else {
+                System.out.println("Tecla no válida. Usa W, A, S, D para mover.");
+            }
+        }
+    }
+
+    /**
+     * Método que solicita al usuario el nivel a elegir.
+     */
     public Integer solicitarOpcion(){
         Integer opcion = 0;
         System.out.print("Eliga un nivel: ");

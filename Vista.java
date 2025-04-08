@@ -10,6 +10,10 @@ import java.util.List;
  */
 public class Vista {
 	
+        private static char[][] mapa = null;
+        private static Integer filaJugador;
+        private static Integer columnaJugador;
+
 	/**
 	 * Método para cargar varios escenarios.
 	 * @param rutaEscenarios Lista de rutas de los arhivos de escenarios.
@@ -24,10 +28,11 @@ public class Vista {
 
             try {
                 List<String> archivoEscenario = Files.readAllLines(rutaEscenario);
-
-                for (String linea : archivoEscenario) {
+                mapa = new char[archivoEscenario.size()][];
+              
+                for (int i = 0; i < archivoEscenario.size(); i++) {
+                    String linea = archivoEscenario.get(i);
                     String[] partes = linea.split(" ");
-                    //Creamos un StringBuilder para construir la fila visual del escenario.
                     StringBuilder fila = new StringBuilder();
 
                     for(String parte : partes) {
@@ -55,16 +60,70 @@ public class Vista {
                         }
 
                         //Agregamos el símbolo a la fila tanta veces como indique cantidad. 
-                        for(int i = 0; i < cantidad; i++) {
-                            fila.append(simbolo); //Método de la clase StringBuilder. Añadimos el símboo a la fila.
+                        for(int j = 0; j < cantidad; j++) {
+                            fila.append(simbolo); //Método de la clase StringBuilder. Añadimos el símbolo a la fila.
                         }
                     }
-                    System.out.println(fila.toString());
+                    mapa[i] = fila.toString().toCharArray();
+                    //System.out.println(fila.toString());
                 }
             } catch (IOException e) {
                 e.printStackTrace();            
         }
     }
+   
+    /**
+     * Método con el cuál el jugador aparece en la primera posición del mapa que no sea ni borde ni obstáculo.
+     */
+    public void posicionarJugador(){
+        for(int i = 0; i < mapa.length; i++){
+            for(int j = 0; j < mapa[i].length; j++){
+                if(mapa[i][j] == '_'){
+                    filaJugador = i;
+                    columnaJugador = j;
+                    return;
+                }
+            }
+        }
+    }
 
+    /**
+     * Método que muestra al jugador en el mapa una vez carga por priemra vez o cuando se actualice su posición
+     * en el mapa.
+     */
+    public void mostrarMapaConJugador() {
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[i].length; j++) {
+                if (i == filaJugador && j == columnaJugador) {
+                    System.out.print('Ï');
+                } else {
+                    System.out.print(mapa[i][j]);
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * Método que recibe la tecla pulsada por el usuario y modifica sus coordenadas para moverlo a través
+     * del mapa.
+     * @param tecla Tecla que pulsa el usuario.
+     */
+    public void moverJugador(char tecla){
+        switch(tecla) {
+            case 'w':
+                 filaJugador--;
+                 break;
+            case 'a':
+                columnaJugador--;
+                break;
+            case 's':
+                filaJugador++;
+                break;
+            case 'd':
+                columnaJugador++;
+                break;
+        }
+    }
 
 }
