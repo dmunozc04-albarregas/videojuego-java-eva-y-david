@@ -39,16 +39,16 @@ public class Vista {
                         switch(tipo) {
                             case 'E': simbolo = '_';
                                 espacios += cantidad;
-                                continue;
+                                break;
                             case 'O': simbolo = '¬';
                                 obstaculos += cantidad;
-                                continue;
+                                break;
                             case 'B': simbolo = '|'; 
                                 borde += cantidad;
-                                continue;
+                                break;
                             case 'G': simbolo = '-';
                                 guion += cantidad;
-                                continue;
+                                break;
                             default:
                                 simbolo = ' ';
                                 break;
