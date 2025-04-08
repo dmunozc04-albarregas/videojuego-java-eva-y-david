@@ -31,7 +31,7 @@ public class Vista {
                     StringBuilder fila = new StringBuilder();
 
                     for(String parte : partes) {
-                        int cantidad = Integer.valueOf(parte.substring(0, parte.length()) - 1);
+                        int cantidad = Integer.valueOf(parte.substring(0, parte.length() - 1));
                         char tipo = parte.charAt(parte.length() - 1);
 
                         char simbolo = ' ';
