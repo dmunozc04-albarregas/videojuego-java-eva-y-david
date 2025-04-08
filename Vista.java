@@ -19,6 +19,8 @@ public class Vista {
 
             int obstaculos = 0;
             int espacios = 0;
+            int borde = 0;
+            int guion = 0;
 
             try {
                 List<String> archivoEscenario = Files.readAllLines(rutaEscenario);
@@ -32,17 +34,26 @@ public class Vista {
                         int cantidad = Integer.valueOf(parte.substring(0, parte.length() - 1));
                         char tipo = parte.charAt(parte.length() - 1);
 
-                        char simbolo;
+                        char simbolo = ' ';
 
-                        if(tipo == 'E') {
-                            simbolo = '|';
-                            espacios += cantidad;
-                        } else if(tipo == 'O') {
-                            simbolo = '¬';
-                            obstaculos += cantidad;
-                        } else {
-                            continue;
+                        switch(tipo) {
+                            case 'E': simbolo = '_';
+                                espacios += cantidad;
+                                continue;
+                            case 'O': simbolo = '¬';
+                                obstaculos += cantidad;
+                                continue;
+                            case 'B': simbolo = '|'; 
+                                borde += cantidad;
+                                continue;
+                            case 'G': simbolo = '-';
+                                guion += cantidad;
+                                continue;
+                            default:
+                                simbolo = ' ';
+                                break;
                         }
+
                         //Agregamos el símbolo a la fila tanta veces como indique cantidad. 
                         for(int i = 0; i < cantidad; i++) {
                             fila.append(simbolo); //Método de la clase StringBuilder. Añadimos el símboo a la fila.
@@ -54,4 +65,6 @@ public class Vista {
                 e.printStackTrace();            
         }
     }
+
+
 }

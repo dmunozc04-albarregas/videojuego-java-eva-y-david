@@ -15,7 +15,6 @@ public class Controlador {
     private static Scanner teclado;
     private Vista vista;
     private Jugador jugador;
-    //private Escenario escenario;
 
     /**
      * Contructor de la clase Controlador.
