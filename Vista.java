@@ -13,14 +13,13 @@ public class Vista {
         private static char[][] mapa = null;
         private static Integer filaJugador;
         private static Integer columnaJugador;
+        private Controlador controlador;
 
 	/**
 	 * Método para cargar varios escenarios.
 	 * @param rutaEscenarios Lista de rutas de los arhivos de escenarios.
 	 */
     public void cargarEscenarios(Path rutaEscenario, Integer opcion) {
-            System.out.println("\n=== " + "Nivel " + opcion + " ===");
-
             int obstaculos = 0;
             int espacios = 0;
             int borde = 0;
@@ -65,7 +64,6 @@ public class Vista {
                         }
                     }
                     mapa[i] = fila.toString().toCharArray();
-                    //System.out.println(fila.toString());
                 }
             } catch (IOException e) {
                 e.printStackTrace();            
@@ -153,5 +151,18 @@ public class Vista {
                 break;
         }
     }
+
+    /**
+     * Método para verificar que si el jugador colisiona con un obstáculo o marco
+     * activa la función para eliminar vida del jugador.
+     */
+    public boolean verificacionVida() {
+        char siguienteCelda = mapa[filaJugador][columnaJugador];
+        
+        if(siguienteCelda == '|' || siguienteCelda == '¬' || siguienteCelda == '-') {
+            return true;
+        }
+        return false;
+    }    
 
 }
