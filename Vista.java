@@ -87,11 +87,36 @@ public class Vista {
         }
     }
 
+    public void limpiarConsola() {
+        try {
+            if (System.getProperty("os.name") //Obtiene información del SO en el que se ejcuta el programa. "os.name" devuelve el nombre del SO
+                .contains("Windows")) {
+                // Para sistemas Windows
+                //Clase para crear y gestionar procesos del SO desde un programa java
+                //Ejecutamos el comando cmd.
+                //"/c"Le  dice al cmd que ejecute el comando que sigue y luego termine.
+                //"csl" es el comando que se ejecuta.
+                new ProcessBuilder("cmd", "/c", "cls")
+                                .inheritIO()        //Cualquier salida de cls se muestra en la consola de java.
+                                .start()            //Inicia el proceso de ProcessBuilder(cmd /c cls)            
+                                .waitFor();         //Hace que el programa java espere hasta que termina la ejecución para limpiar la pantalla.
+            } else {
+                // Para sistemas Unix/Linux/Mac
+                System.out.print("\033[H\033[2J"); //\033 carácter de escape [H mueve el cursor al inicio \033[2J borra toda la pantalla.
+                System.out.flush();   //Se asegura que todo lo que está en el buffer de salida se envia a la consola. 
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Método que muestra al jugador en el mapa una vez carga por priemra vez o cuando se actualice su posición
      * en el mapa.
      */
     public void mostrarMapaConJugador() {
+        limpiarConsola();
+
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa[i].length; j++) {
                 if (i == filaJugador && j == columnaJugador) {
