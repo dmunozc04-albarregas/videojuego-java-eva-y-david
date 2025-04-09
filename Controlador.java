@@ -15,6 +15,7 @@ public class Controlador {
     private static Scanner teclado;
     private Vista vista;
     private Jugador jugador;
+    private int vidas = 3;
 
     /**
      * Contructor de la clase Controlador.
@@ -88,7 +89,7 @@ public class Controlador {
 
         vista.cargarEscenarios(rutaEscenarioElegido, opcion);
         vista.posicionarJugador();
-        Integer vidas = 3;
+        
         do{
             vista.mostrarMapaConJugador();
             obtenerTecla();
@@ -117,10 +118,23 @@ public class Controlador {
 
             if (tecla == 'w' || tecla == 'a' || tecla == 's' || tecla == 'd') {
                 vista.moverJugador(tecla);
+                controladoVida(tecla);
             } else {
                 System.out.println("Tecla no válida. Usa W, A, S, D para mover.");
             }
         }
+    }
+
+    private boolean controladoVida(char simbolo) {
+        if (vista.verificacionVida(simbolo)) {
+            vidas--;
+            System.out.println("¡Has perdido una vida! Vidas restantes: " + vidas);
+            if (vidas == 0) {
+                System.out.println("💀¡Has perdido todas tus vidas! Fin de la partida.");
+                return true; // señal de salir del juego
+            }
+        }
+        return false; // seguir jugando
     }
 
     /**
