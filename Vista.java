@@ -156,10 +156,8 @@ public class Vista {
      * Método para verificar que si el jugador colisiona con un obstáculo o marco
      * activa la función para eliminar vida del jugador.
      */
-    public boolean verificacionVida() {
-        char siguienteCelda = mapa[filaJugador][columnaJugador];
-        
-        if(siguienteCelda == '|' || siguienteCelda == '¬' || siguienteCelda == '-') {
+    public boolean verificacionVida(char simbolo) {
+        if(simbolo == '|' || simbolo == '¬' || simbolo == '-') {
             return true;
         }
         return false;
