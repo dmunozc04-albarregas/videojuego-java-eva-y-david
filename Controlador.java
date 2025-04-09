@@ -109,18 +109,16 @@ public class Controlador {
 
             if (teclaString.isEmpty()) {
                 System.out.println("¡No se ha introducido ninguna tecla! Por favor, ingrese W, A, S, o D.");
-            }
-        }while((teclaString.isEmpty()));
+            }else {
+                char tecla = teclaString.charAt(0);
 
-        if (!teclaString.isEmpty()) {
-            char tecla = teclaString.charAt(0);
-
-            if (tecla == 'w' || tecla == 'a' || tecla == 's' || tecla == 'd') {
+                if (tecla == 'w' || tecla == 'a' || tecla == 's' || tecla == 'd') {
                 vista.moverJugador(tecla);
-            } else {
-                System.out.println("Tecla no válida. Usa W, A, S, D para mover.");
+                } else {
+                    System.out.println("Tecla no válida. Usa W, A, S, D para mover.");
+                }
             }
-        }
+        }while(true);
     }
 
     /**

@@ -87,6 +87,9 @@ public class Vista {
         }
     }
 
+    /**
+     * Método para limpiar la consola según sea Windows o Linux. 
+     */
     public void limpiarConsola() {
         try {
             if (System.getProperty("os.name") //Obtiene información del SO en el que se ejcuta el programa. "os.name" devuelve el nombre del SO
