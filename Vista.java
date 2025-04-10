@@ -133,7 +133,7 @@ public class Vista {
             }
             System.out.println();
         }
-        if(verificarPosicion()) {
+        if(verificarPosicion(filaJugador, columnaJugador)) {
             controlador.perderVida();
         }
     }
@@ -143,58 +143,45 @@ public class Vista {
      * del mapa.
      * @param tecla Tecla que pulsa el usuario.
      */
-    /*public void moverJugador(char tecla){
+    public void moverJugador(char tecla) {
+        int nuevaFila = filaJugador;
+        int nuevaColumna = columnaJugador;
+
         switch(tecla) {
             case 'w':
-                 filaJugador--;
-                 break;
+                if (filaJugador > 0) {  // Verifica si no sale del límite superior
+                    nuevaFila--;
+                }
+                break;
             case 'a':
-                columnaJugador--;
+                if (columnaJugador > 0) {  // Verifica si no sale del límite izquierdo
+                    nuevaColumna--;
+                }
                 break;
             case 's':
-                filaJugador++;
+                if (filaJugador < mapa.length - 1) {  // Verifica si no sale del límite inferior
+                    nuevaFila++;
+                }
                 break;
             case 'd':
-                columnaJugador++;
+                if (columnaJugador < mapa[0].length - 1) {  // Verifica si no sale del límite derecho
+                    nuevaColumna++;
+                }
                 break;
         }
-        if(verificarPosicion()) {
-            controlador.perderVida();
+        // Verifica si la nueva posición tiene un obstáculo
+        if (!verificarPosicion(nuevaFila, nuevaColumna)) {
+            filaJugador = nuevaFila;
+            columnaJugador = nuevaColumna;
         }
-    }*/
-    public void moverJugador(char tecla) {
-    switch(tecla) {
-        case 'w':
-            if (filaJugador > 0) {  // Verifica si no sale del límite superior
-                filaJugador--;
-            }
-            break;
-        case 'a':
-            if (columnaJugador > 0) {  // Verifica si no sale del límite izquierdo
-                columnaJugador--;
-            }
-            break;
-        case 's':
-            if (filaJugador < mapa.length - 1) {  // Verifica si no sale del límite inferior
-                filaJugador++;
-            }
-            break;
-        case 'd':
-            if (columnaJugador < mapa[0].length - 1) {  // Verifica si no sale del límite derecho
-                columnaJugador++;
-            }
-            break;
     }
-    // Aquí puede agregar cualquier otra lógica adicional (verificar símbolos en la nueva posición, etc.)
-}
-
 
     /**
      * Método para verificar que si el jugador colisiona con un obstáculo o marco
      * activa la función para eliminar vida del jugador.
      */
-    public boolean verificarPosicion() {
-        char simbolo = mapa[filaJugador][columnaJugador];
+    public boolean verificarPosicion(int fila, int columna) {
+        char simbolo = mapa[fila][columna];
         if(simbolo == '|' || simbolo == '¬' || simbolo == '-') {
             System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
             return true;
