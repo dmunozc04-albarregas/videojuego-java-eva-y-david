@@ -93,16 +93,27 @@ public class Vista {
      * Método para limpiar la consola según sea Windows o Linux. 
      */
     public void limpiarConsola() {
-        try {
-             new ProcessBuilder("cmd", "/c", "cls")
-                                .inheritIO()        //Cualquier salida de cls se muestra en la consola de java.
-                                .start()            //Inicia el proceso de ProcessBuilder(cmd /c cls)            
-                                .waitFor();         //Hace que el programa java espere hasta que termina la ejecución para limpiar la pantalla.
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();  // Captura y muestra excepciones relacionadas con la interrupción del proceso
-    }
+         try {
+             if (System.getProperty("os.name") //Obtiene información del SO en el que se ejcuta el programa. "os.name" devuelve el nombre del SO
+                 .contains("Windows")) {
+                 // Para sistemas Windows
+                 //Clase para crear y gestionar procesos del SO desde un programa java
+                 //Ejecutamos el comando cmd.
+                 //"/c"Le  dice al cmd que ejecute el comando que sigue y luego termine.
+                 //"csl" es el comando que se ejecuta.
+                 new ProcessBuilder("cmd", "/c", "cls")
+              new ProcessBuilder("cmd", "/c", "cls")
+                                 .inheritIO()        //Cualquier salida de cls se muestra en la consola de java.
+                                 .start()            //Inicia el proceso de ProcessBuilder(cmd /c cls)            
+                                 .waitFor();         //Hace que el programa java espere hasta que termina la ejecución para limpiar la pantalla.
+             } else {
+                 // Para sistemas Unix/Linux/Mac
+                 System.out.print("\033[H\033[2J"); //\033 carácter de escape [H mueve el cursor al inicio \033[2J borra toda la pantalla.
+                 System.out.flush();   //Se asegura que todo lo que está en el buffer de salida se envia a la consola. 
+             }
+         } catch (IOException | InterruptedException e) {
+             e.printStackTrace();  // Captura y muestra excepciones relacionadas con la interrupción del proceso
+        }
     }
 
     /**
@@ -185,7 +196,7 @@ public class Vista {
     public boolean verificarPosicion() {
         char simbolo = mapa[filaJugador][columnaJugador];
         if(simbolo == '|' || simbolo == '¬' || simbolo == '-') {
-                    System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
+            System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
             return true;
         }
         return false;
