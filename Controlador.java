@@ -153,8 +153,19 @@ public class Controlador {
      */
     public Integer solicitarOpcion(){
         Integer opcion = 0;
-        System.out.print("Eliga un nivel: ");
-        opcion = Integer.valueOf(teclado.nextLine());
+        boolean correcto = false;
+
+        do {
+            System.out.print("Elija un nivel: ");
+            try{
+                opcion = Integer.valueOf(teclado.nextLine());
+                if(opcion >= 1 && opcion <= 4) {
+                    correcto = true;
+                }
+            } catch (Exception e) {
+                System.out.println("El valor tiene que ser numerico y entre 1 y 4.");
+            }
+        }while(!correcto);
 
         return opcion;
     }  
