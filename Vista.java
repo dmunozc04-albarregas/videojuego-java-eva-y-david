@@ -184,6 +184,7 @@ public class Vista {
         char simbolo = mapa[fila][columna];
         if (simbolo == '|' || simbolo == '¬' || simbolo == '-') {
             System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
+            controlador.perderVida();
             try {
             Thread.sleep(1000);  // 2000 milisegundos = 2 segundos
         } catch (InterruptedException e) {
