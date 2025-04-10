@@ -132,7 +132,8 @@ public class Controlador {
         System.out.println("¡Has perdido una vida! Vidas restantes: " + vidas);
         
         if (vidas == 0) {
-            System.out.println("💀¡Has perdido todas tus vidas! Fin de la partida.");
+            System.out.println("¡Has perdido todas tus vidas! Fin de la partida.");
+            System.exit(0);
         }
     }
 
