@@ -46,16 +46,17 @@ public class App {
      */
     private static void crearDirectorios() {
         Path pathActual = Paths.get("");
-        Path directorioEscenario = pathActual.resolve("escenarios");
+        //Path directorioEscenario = pathActual.resolve("escenarios");
         Path directorioJugador = pathActual.resolve("jugador");
         Path directorioPartida = pathActual.resolve("partida");
 
         try {
-            Files.createDirectory(directorioEscenario);
+            //Files.createDirectory(directorioEscenario);
             Files.createDirectory(directorioJugador);
             Files.createDirectory(directorioPartida);
             System.out.println("Directorios de configuración creados correctamente");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("No se pudieron crear los directorios.");
         }
     }

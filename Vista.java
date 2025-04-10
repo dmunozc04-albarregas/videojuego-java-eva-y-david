@@ -133,9 +133,9 @@ public class Vista {
             }
             System.out.println();
         }
-        if(verificarPosicion(filaJugador, columnaJugador)) {
+        /*if(verificarPosicion()) {
             controlador.perderVida();
-        }
+        }*/
     }
 
     /**
@@ -144,8 +144,8 @@ public class Vista {
      * @param tecla Tecla que pulsa el usuario.
      */
     public void moverJugador(char tecla) {
-        int nuevaFila = filaJugador;
-        int nuevaColumna = columnaJugador;
+        Integer nuevaFila = filaJugador;
+        Integer nuevaColumna = columnaJugador;
 
         switch(tecla) {
             case 'w':
@@ -180,13 +180,20 @@ public class Vista {
      * Método para verificar que si el jugador colisiona con un obstáculo o marco
      * activa la función para eliminar vida del jugador.
      */
-    public boolean verificarPosicion(int fila, int columna) {
+    public boolean verificarPosicion(Integer fila, Integer columna) {
         char simbolo = mapa[fila][columna];
-        if(simbolo == '|' || simbolo == '¬' || simbolo == '-') {
+        if (simbolo == '|' || simbolo == '¬' || simbolo == '-') {
             System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
-            return true;
+            controlador.perderVida();
+            try {
+            Thread.sleep(1000);  // 2000 milisegundos = 2 segundos
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        return false;
+            return true;
+
+        }
+        return false;  
     }    
 
 }

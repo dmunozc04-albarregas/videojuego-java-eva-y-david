@@ -72,6 +72,7 @@ public class Controlador {
             jugador.crearJugador(jugador.getNombreUsuario(), jugador.getEmail());
         }
 
+        mostrarMenu();
         Integer opcion = solicitarOpcion();
 
         Map<String,Path> rutasEscenarios = new HashMap<>();
@@ -95,6 +96,16 @@ public class Controlador {
             obtenerTecla();
         }
         while(vidas > 0);
+    }
+
+    /**
+     * Método para mostrar los diferentes niveles posibles para jugar
+     */
+    public void mostrarMenu(){
+        System.out.println("1. Nivel 1");
+        System.out.println("2. Nivel 2");
+        System.out.println("3. Nivel 3");
+        System.out.println("4. Nivel 4");
     }
 
     /**
