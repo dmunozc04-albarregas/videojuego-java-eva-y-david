@@ -23,7 +23,7 @@ public class Controlador {
      * @param jugador Instancia de la case Jugador para gestionar el usuario.
      */
     public Controlador(Scanner teclado, Jugador jugador) {
-        this.vista = new Vista();
+        this.vista = new Vista(this);
         this.teclado = teclado;
         this.jugador = jugador;
     }
@@ -118,23 +118,22 @@ public class Controlador {
 
             if (tecla == 'w' || tecla == 'a' || tecla == 's' || tecla == 'd') {
                 vista.moverJugador(tecla);
-                controladoVida(tecla);
             } else {
                 System.out.println("Tecla no válida. Usa W, A, S, D para mover.");
             }
         }
     }
 
-    private boolean controladoVida(char simbolo) {
-        if (vista.verificacionVida(simbolo)) {
-            vidas--;
-            System.out.println("¡Has perdido una vida! Vidas restantes: " + vidas);
-            if (vidas == 0) {
-                System.out.println("💀¡Has perdido todas tus vidas! Fin de la partida.");
-                return true; // señal de salir del juego
-            }
+    /**
+     * Pierde una vida y verifica si el juego ha terminado.
+     */
+    public void perderVida() {
+        vidas--;
+        System.out.println("¡Has perdido una vida! Vidas restantes: " + vidas);
+        
+        if (vidas == 0) {
+            System.out.println("💀¡Has perdido todas tus vidas! Fin de la partida.");
         }
-        return false; // seguir jugando
     }
 
     /**
@@ -146,7 +145,5 @@ public class Controlador {
         opcion = Integer.valueOf(teclado.nextLine());
 
         return opcion;
-    }
-
-    
+    }  
 }

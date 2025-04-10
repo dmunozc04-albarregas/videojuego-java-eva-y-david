@@ -10,10 +10,14 @@ import java.util.List;
  */
 public class Vista {
     
-        private static char[][] mapa = null;
-        private static Integer filaJugador;
-        private static Integer columnaJugador;
-        private Controlador controlador;
+    private static char[][] mapa = null;
+    private static Integer filaJugador;
+    private static Integer columnaJugador;
+    private Controlador controlador;
+
+    public Vista(Controlador controlador) {
+        this.controlador = controlador;
+    }
 
     /**
      * Método para cargar varios escenarios.
@@ -90,25 +94,15 @@ public class Vista {
      */
     public void limpiarConsola() {
         try {
-            if (System.getProperty("os.name") //Obtiene información del SO en el que se ejcuta el programa. "os.name" devuelve el nombre del SO
-                .contains("Windows")) {
-                // Para sistemas Windows
-                //Clase para crear y gestionar procesos del SO desde un programa java
-                //Ejecutamos el comando cmd.
-                //"/c"Le  dice al cmd que ejecute el comando que sigue y luego termine.
-                //"csl" es el comando que se ejecuta.
-                new ProcessBuilder("cmd", "/c", "cls")
+             new ProcessBuilder("cmd", "/c", "cls")
                                 .inheritIO()        //Cualquier salida de cls se muestra en la consola de java.
                                 .start()            //Inicia el proceso de ProcessBuilder(cmd /c cls)            
                                 .waitFor();         //Hace que el programa java espere hasta que termina la ejecución para limpiar la pantalla.
-            } else {
-                // Para sistemas Unix/Linux/Mac
-                System.out.print("\033[H\033[2J"); //\033 carácter de escape [H mueve el cursor al inicio \033[2J borra toda la pantalla.
-                System.out.flush();   //Se asegura que todo lo que está en el buffer de salida se envia a la consola. 
-            }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
+        } catch (InterruptedException e) {
+            e.printStackTrace();  // Captura y muestra excepciones relacionadas con la interrupción del proceso
+    }
     }
 
     /**
@@ -135,7 +129,7 @@ public class Vista {
      * del mapa.
      * @param tecla Tecla que pulsa el usuario.
      */
-    public void moverJugador(char tecla){
+    /*public void moverJugador(char tecla){
         switch(tecla) {
             case 'w':
                  filaJugador--;
@@ -150,14 +144,48 @@ public class Vista {
                 columnaJugador++;
                 break;
         }
+        if(verificarPosicion()) {
+            controlador.perderVida();
+        }
+    }*/
+    public void moverJugador(char tecla) {
+    switch(tecla) {
+        case 'w':
+            if (filaJugador > 0) {  // Verifica si no sale del límite superior
+                filaJugador--;
+            }
+            break;
+        case 'a':
+            if (columnaJugador > 0) {  // Verifica si no sale del límite izquierdo
+                columnaJugador--;
+            }
+            break;
+        case 's':
+            if (filaJugador < mapa.length - 1) {  // Verifica si no sale del límite inferior
+                filaJugador++;
+            }
+            break;
+        case 'd':
+            if (columnaJugador < mapa[0].length - 1) {  // Verifica si no sale del límite derecho
+                columnaJugador++;
+            }
+            break;
     }
+    if(verificarPosicion()) {
+            controlador.perderVida();
+    }
+    // Aquí puede agregar cualquier otra lógica adicional (verificar símbolos en la nueva posición, etc.)
+}
+
 
     /**
      * Método para verificar que si el jugador colisiona con un obstáculo o marco
      * activa la función para eliminar vida del jugador.
      */
-    public boolean verificacionVida(char simbolo) {
+    public boolean verificarPosicion() {
+        char simbolo = mapa[filaJugador][columnaJugador];
         if(simbolo == '|' || simbolo == '¬' || simbolo == '-') {
+                    System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
             return true;
         }
         return false;
