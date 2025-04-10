@@ -133,6 +133,9 @@ public class Vista {
             }
             System.out.println();
         }
+        if(verificarPosicion()) {
+            controlador.perderVida();
+        }
     }
 
     /**
@@ -182,9 +185,6 @@ public class Vista {
             }
             break;
     }
-    if(verificarPosicion()) {
-            controlador.perderVida();
-    }
     // Aquí puede agregar cualquier otra lógica adicional (verificar símbolos en la nueva posición, etc.)
 }
 
@@ -196,7 +196,11 @@ public class Vista {
     public boolean verificarPosicion() {
         char simbolo = mapa[filaJugador][columnaJugador];
         if(simbolo == '|' || simbolo == '¬' || simbolo == '-') {
+<<<<<<< HEAD
             System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
+=======
+                System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
+>>>>>>> d88fc24479cc24bd4297eb61eca1f1b32d1a028b
             return true;
         }
         return false;
