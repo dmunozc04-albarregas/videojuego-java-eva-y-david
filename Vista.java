@@ -101,7 +101,7 @@ public class Vista {
                  //Ejecutamos el comando cmd.
                  //"/c"Le  dice al cmd que ejecute el comando que sigue y luego termine.
                  //"csl" es el comando que se ejecuta.
-                 new ProcessBuilder("cmd", "/c", "cls")
+                 new ProcessBuilder("cmd", "/c", "cls");
               new ProcessBuilder("cmd", "/c", "cls")
                                  .inheritIO()        //Cualquier salida de cls se muestra en la consola de java.
                                  .start()            //Inicia el proceso de ProcessBuilder(cmd /c cls)            
@@ -196,11 +196,7 @@ public class Vista {
     public boolean verificarPosicion() {
         char simbolo = mapa[filaJugador][columnaJugador];
         if(simbolo == '|' || simbolo == '¬' || simbolo == '-') {
-<<<<<<< HEAD
             System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
-=======
-                System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
->>>>>>> d88fc24479cc24bd4297eb61eca1f1b32d1a028b
             return true;
         }
         return false;
