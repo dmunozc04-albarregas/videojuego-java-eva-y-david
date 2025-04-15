@@ -1,3 +1,7 @@
+package fuentes.com.videojuego;
+
+import recursos.com.videojuego.vistas.Vista;
+
 import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;

@@ -1,26 +1,40 @@
+package fuentes.com.videojuego;
+
+import recursos.com.videojuego.vistas.ControladorVistas;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+
 
 /**
  * Clase principal que crea un directorio de configuración y subdirectorios.
  * @author David Muñoz - Eva Retamar
  * Licencia GPL v3. Fecha 03 2025
  */
-public class App {
+public class App extends Application{
     
     private static Scanner teclado = new Scanner(System.in);
-
+    private static ControladorVistas ControladorVistas;
 
     public static void main(String[] args) {
         comprobarFicheroConfiguracion();
         Jugador jugador = new Jugador();
         Controlador controlador = new Controlador(teclado, jugador);
-        controlador.iniciarJuego();
+        launch(args);
+        //controlador.iniciarJuego();
         teclado.close();
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        new ControladorVistas(stage);
     }
 
     /**
