@@ -3,6 +3,8 @@ import java.nio.file.Path;
 import java.io.IOException;
 import java.util.List;
 
+
+
 /**
  * Clase vista que se encarga de mostrar la información de los escenarios.
  * @author David Muñoz - Eva Retamar
