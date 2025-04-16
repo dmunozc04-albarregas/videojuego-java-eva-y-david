@@ -1,8 +1,8 @@
 Compilar programa FX
-javac -g -d compilados --module-path C:/javafx-sdk-24/lib --add-modules javafx.fxml,javafx.controls fuentes/com/videojuego/*.java fuentes/com/videojuego/controladores/*.java fuentes/recursos/com/videojuego/vistas/*.java
+javac -g -d compilados --module-path C:/javafx-sdk-24/lib --add-modules javafx.fxml,javafx.controls fuentes/com/videojuego/*.java fuentes/com/videojuego/controladores/*.java recursos/com/videojuego/vistas/*.java
 
 Copiar FXML
-xcopy fuentes\recursos\com\videojuego\vistas\*.fxml compilados\recursos\com\videojuego\vistas\
+xcopy recursos\com\videojuego\vistas\*.fxml compilados\recursos\com\videojuego\vistas\
 
 Ejecutar programa FX
 java --module-path C:/javafx-sdk-24/lib --add-modules javafx.fxml,javafx.controls -cp compilados;fuentes/recursos fuentes.com.videojuego.App
