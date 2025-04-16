@@ -55,7 +55,7 @@ public class ControladorAccesoUsuario {
 
  private void ventanaRegistroUsuario() {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("recursos/com/videojuego/vistas/registrar_usuario.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/recursos/com/videojuego/vistas/registrar_usuario.fxml"));
         Parent root = loader.load();
 
         ControladorRegistroUsuario controlador = loader.getController();

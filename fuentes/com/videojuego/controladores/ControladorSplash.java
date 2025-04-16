@@ -16,7 +16,7 @@ public class ControladorSplash {
     @FXML
     private void ventanaAccesoUsuario() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("recursos/com/videojuego/vistas/solicitar_usuario.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/recursos/com/videojuego/vistas/solicitar_usuario.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 

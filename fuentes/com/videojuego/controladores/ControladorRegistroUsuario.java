@@ -38,11 +38,11 @@ public class ControladorRegistroUsuario{
         String correoUsuario = correoUsuarioRegistro.getText().trim();
 
         if (nombreUsuario.isEmpty() || correoUsuario.isEmpty()) {
-            mostrarAlerta("Por favor, introduce un nombre / email.");
+            mostrarAlerta("Por favor, introduza un nombre de usuario / email.");
             return;
         } else {
             jugador.crearJugador(nombreUsuario, correoUsuario);
-            mostrarAlerta("Usuario creado correctamente, entrando al juego...");
+            mostrarAlerta("Jugador creado correctamente, entrando al juego...");
         }
     }
 
