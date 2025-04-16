@@ -2,6 +2,7 @@
 *.class
 bin*
 compilados*
+/compilados/
 
 # Log file
 *.log
