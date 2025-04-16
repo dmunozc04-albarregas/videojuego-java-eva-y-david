@@ -12,27 +12,27 @@
    <children>
       <ImageView fitHeight="62.0" fitWidth="104.0" layoutX="123.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../recursos/registro-icon.png" />
+            <Image url="@../../../registro-icon.png" />
          </image>
       </ImageView>
-      <Text layoutX="71.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca los siguientes datos:" textAlignment="CENTER" wrappingWidth="169.1484375">
+      <Text layoutX="46.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrar jugador" textAlignment="CENTER" wrappingWidth="212.1484375">
          <font>
             <Font name="Calibri Bold Italic" size="24.0" />
          </font>
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="83.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario: ">
+      <Text layoutX="82.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario: ">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="nombreUsuarioRegistro" layoutX="81.0" layoutY="185.0" />
-      <Text layoutX="83.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo electrónico:">
+      <TextField fx:id="nombreUsuarioRegistro" layoutX="78.0" layoutY="163.0" />
+      <Text layoutX="87.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo electrónico:">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="correoUsuarioRegistro" layoutX="80.0" layoutY="251.0" />
-      <Button fx:id="btnRegistro" layoutX="97.0" layoutY="287.0" mnemonicParsing="false" onAction="#validarRegistro" prefHeight="25.0" prefWidth="111.0" text="ACEPTAR" />
+      <TextField fx:id="correoUsuarioRegistro" layoutX="80.0" layoutY="230.0" />
+      <Button fx:id="btnRegistro" layoutX="99.0" layoutY="274.0" mnemonicParsing="false" onAction="#validarRegistro" prefHeight="25.0" prefWidth="111.0" text="ACEPTAR" />
    </children>
 </AnchorPane>

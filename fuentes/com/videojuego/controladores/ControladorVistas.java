@@ -1,4 +1,4 @@
-package recursos.com.videojuego.vistas;
+package fuentes.com.videojuego.controladores;
 
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -23,7 +23,7 @@ public class ControladorVistas {
 
 	public Scene cargarVista1(){
 	   	try{
-        	FXMLLoader fxmlLoader = new FXMLLoader(ControladorVistas.class.getResource("pantalla_splash.fxml"));
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("com/videojuego/vistas/pantalla_splash.fxml"));
         	Parent raiz = fxmlLoader.load();
 			vista1 = new Scene(raiz);
 		}

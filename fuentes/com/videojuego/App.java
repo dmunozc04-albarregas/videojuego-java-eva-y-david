@@ -1,6 +1,7 @@
 package fuentes.com.videojuego;
 
-import recursos.com.videojuego.vistas.ControladorVistas;
+import fuentes.com.videojuego.controladores.ControladorPrincipal;
+import fuentes.com.videojuego.controladores.ControladorVistas;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +11,6 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 
 
 /**
@@ -26,7 +26,7 @@ public class App extends Application{
     public static void main(String[] args) {
         comprobarFicheroConfiguracion();
         Jugador jugador = new Jugador();
-        Controlador controlador = new Controlador(teclado, jugador);
+        ControladorPrincipal controlador = new ControladorPrincipal(teclado, jugador);
         launch(args);
         //controlador.iniciarJuego();
         teclado.close();
@@ -41,7 +41,7 @@ public class App extends Application{
      * Método para comprobar si existe el fichero de configuración.
      */
     private static void comprobarFicheroConfiguracion() {
-        File ficheroConfiguracion = new File("config.txt");
+        File ficheroConfiguracion = new File("fuentes/com/videojuego/config.txt");
 
         try {
             if (!ficheroConfiguracion.exists()) {
@@ -49,9 +49,13 @@ public class App extends Application{
                 System.out.println("Fichero de configuración creado correctamente");
                 crearDirectorios();
             }
+            else{
+                System.out.println("Fichero de configuración cargado correctamente");
+            }
         } catch (IOException e) {
             System.out.println("Algo ha ido mal");
             e.printStackTrace();
+            System.exit(-1);
         }
     }
 
@@ -59,7 +63,7 @@ public class App extends Application{
      * Método para crear subdirectorios.
      */
     private static void crearDirectorios() {
-        Path pathActual = Paths.get("");
+        Path pathActual = Paths.get("fuentes/com/videojuego/");
         //Path directorioEscenario = pathActual.resolve("escenarios");
         Path directorioJugador = pathActual.resolve("jugador");
         Path directorioPartida = pathActual.resolve("partida");

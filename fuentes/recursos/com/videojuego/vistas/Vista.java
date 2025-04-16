@@ -1,6 +1,6 @@
 package recursos.com.videojuego.vistas;
 
-import fuentes.com.videojuego.Controlador;
+import fuentes.com.videojuego.controladores.ControladorPrincipal;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,9 +18,9 @@ public class Vista {
     private static char[][] mapa = null;
     private static Integer filaJugador;
     private static Integer columnaJugador;
-    private Controlador controlador;
+    private ControladorPrincipal controlador;
 
-    public Vista(Controlador controlador) {
+    public Vista(ControladorPrincipal controlador) {
         this.controlador = controlador;
     }
 

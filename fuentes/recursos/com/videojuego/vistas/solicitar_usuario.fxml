@@ -19,7 +19,7 @@
       <Button fx:id="btnValidarUsuario" layoutX="118.0" layoutY="234.0" mnemonicParsing="false" onAction="#comprobarNombreUsuario" prefHeight="33.0" prefWidth="74.0" text="Aceptar" />
       <ImageView fitHeight="48.0" fitWidth="44.0" layoutX="125.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../recursos/user-icon.png" />
+            <Image url="@../../../user-icon.png" />
          </image>
       </ImageView>
    </children>

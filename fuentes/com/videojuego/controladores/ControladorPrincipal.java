@@ -1,5 +1,6 @@
-package fuentes.com.videojuego;
+package fuentes.com.videojuego.controladores;
 
+import fuentes.com.videojuego.Jugador;
 import recursos.com.videojuego.vistas.Vista;
 
 import java.util.Scanner;
@@ -15,7 +16,7 @@ import java.util.HashMap;
  * @author David Muñoz - Eva Retamar
  * Licencia GPL v3. Fecha 03 2025
  */
-public class Controlador {
+public class ControladorPrincipal {
     private static Scanner teclado;
     private Vista vista;
     private Jugador jugador;
@@ -26,7 +27,7 @@ public class Controlador {
      * @param teclado Objeto Scanner para la entrada de datos del usuario.
      * @param jugador Instancia de la case Jugador para gestionar el usuario.
      */
-    public Controlador(Scanner teclado, Jugador jugador) {
+    public ControladorPrincipal(Scanner teclado, Jugador jugador) {
         this.vista = new Vista(this);
         this.teclado = teclado;
         this.jugador = jugador;

@@ -47,7 +47,7 @@ public class Jugador implements Serializable{
 	 * @param nombreUsuario Nombre del jugador a comprobar.
 	 */
 	public boolean comprobarExistenciaJugador(String nombreUsuario){
-       Path pathJugadores = Paths.get("jugador");
+       Path pathJugadores = Paths.get("fuentes/com/videojuego/jugador");
        try{
        		DirectoryStream<Path> flujoDatos = Files.newDirectoryStream(pathJugadores);
 
@@ -73,7 +73,7 @@ public class Jugador implements Serializable{
 	public void crearJugador(String nombreUsuario, String email){
 		List<Jugador> contenidoFicheroJugador = new ArrayList<>();
 		contenidoFicheroJugador.add(new Jugador(nombreUsuario, email));
-        Path rutaJugadoresRegistrados = Paths.get("jugador/" + nombreUsuario + ".bin");
+        Path rutaJugadoresRegistrados = Paths.get("fuentes/com/videojuego/jugador/" + nombreUsuario + ".bin");
 
         try{
         	OutputStream ficheroJugador = Files.newOutputStream(rutaJugadoresRegistrados);

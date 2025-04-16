@@ -1,4 +1,4 @@
-package recursos.com.videojuego.vistas;
+package fuentes.com.videojuego.controladores;
 
 import fuentes.com.videojuego.Jugador;
 
@@ -33,11 +33,11 @@ public class ControladorAccesoUsuario {
         String nombreUsuario = nombreUsuarioAComprobar.getText().trim();
 
         if (nombreUsuario.isEmpty()) {
-            mostrarAlerta("Por favor, introduce un nombre.");
+            mostrarAlerta("Por favor, introduzca un nombre de usuario.");
             return;
         }
 
-        if (jugador.comprobarExistenciaJugador(nombreUsuario)) {
+        else if (jugador.comprobarExistenciaJugador(nombreUsuario)) {
             mostrarAlerta("¡Entrando al juego...");
         } else {
             //mostrarAlerta("El usuario no existe.");
@@ -47,7 +47,7 @@ public class ControladorAccesoUsuario {
 
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(AlertType.INFORMATION);
-        alerta.setTitle("Verificación de usuario");
+        alerta.setTitle("Verificación de jugador");
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
@@ -55,7 +55,7 @@ public class ControladorAccesoUsuario {
 
  private void ventanaRegistroUsuario() {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("registrar_usuario.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("recursos/com/videojuego/vistas/registrar_usuario.fxml"));
         Parent root = loader.load();
 
         ControladorRegistroUsuario controlador = loader.getController();
@@ -64,7 +64,7 @@ public class ControladorAccesoUsuario {
         Scene scene = new Scene(root);
         Stage modalStage = new Stage();
         modalStage.setScene(scene);
-        modalStage.setTitle("Registrar Usuario");
+        modalStage.setTitle("Registrar Jugador");
 
         modalStage.initModality(Modality.APPLICATION_MODAL);
         modalStage.initOwner(nombreUsuarioAComprobar.getScene().getWindow());

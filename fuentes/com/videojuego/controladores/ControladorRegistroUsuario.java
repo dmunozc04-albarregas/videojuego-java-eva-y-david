@@ -1,4 +1,4 @@
-package recursos.com.videojuego.vistas;
+package fuentes.com.videojuego.controladores;
 
 import fuentes.com.videojuego.Jugador;
 
@@ -48,7 +48,7 @@ public class ControladorRegistroUsuario{
 
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Verificación de usuario"); 
+        alerta.setTitle("Registro de jugador"); 
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
