@@ -1,6 +1,7 @@
-package fuentes.com.videojuego.controladores;
+package com.videojuego.controladores;
 
-import fuentes.com.videojuego.Jugador;
+import com.videojuego.modelos.Jugador;
+import com.videojuego.modelos.Escenario;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,27 +54,27 @@ public class ControladorAccesoUsuario {
         alerta.showAndWait();
     }
 
- private void ventanaRegistroUsuario() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/recursos/com/videojuego/vistas/registrar_usuario.fxml"));
-        Parent root = loader.load();
+    private void ventanaRegistroUsuario() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/videojuego/vistas/registrar_usuario.fxml"));
+            Parent root = loader.load();
 
-        ControladorRegistroUsuario controlador = loader.getController();
-        controlador.setNombreUsuario(nombreUsuarioAComprobar.getText().trim());
+            ControladorRegistroUsuario controlador = loader.getController();
+            controlador.setNombreUsuario(nombreUsuarioAComprobar.getText().trim());
 
-        Scene scene = new Scene(root);
-        Stage modalStage = new Stage();
-        modalStage.setScene(scene);
-        modalStage.setTitle("Registrar Jugador");
+            Scene scene = new Scene(root);
+            Stage modalStage = new Stage();
+            modalStage.setScene(scene);
+            modalStage.setTitle("Registrar Jugador");
 
-        modalStage.initModality(Modality.APPLICATION_MODAL);
-        modalStage.initOwner(nombreUsuarioAComprobar.getScene().getWindow());
+            modalStage.initModality(Modality.APPLICATION_MODAL);
+            modalStage.initOwner(nombreUsuarioAComprobar.getScene().getWindow());
 
-        modalStage.showAndWait();
+            modalStage.showAndWait();
 
-    } catch (IOException e) {
-        e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
 
 }

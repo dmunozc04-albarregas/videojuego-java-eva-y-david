@@ -1,4 +1,4 @@
-package fuentes.com.videojuego.controladores;
+package com.videojuego.controladores;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,7 +16,7 @@ public class ControladorSplash {
     @FXML
     private void ventanaAccesoUsuario() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/recursos/com/videojuego/vistas/solicitar_usuario.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/videojuego/vistas/solicitar_usuario.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 

@@ -1,7 +1,8 @@
-package fuentes.com.videojuego;
+package com.videojuego;
 
-import fuentes.com.videojuego.controladores.ControladorPrincipal;
-import fuentes.com.videojuego.controladores.ControladorVistas;
+import com.videojuego.controladores.ControladorPrincipal;
+import com.videojuego.controladores.ControladorVistas;
+import com.videojuego.modelos.Jugador;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 public class App extends Application{
     
     private static Scanner teclado = new Scanner(System.in);
-    private static ControladorVistas ControladorVistas;
+    private static ControladorVistas controladorVistas;
 
     public static void main(String[] args) {
         comprobarFicheroConfiguracion();
@@ -34,7 +35,7 @@ public class App extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-        new ControladorVistas(stage);
+        controladorVistas = new ControladorVistas(stage);
     }
 
     /**

@@ -1,4 +1,4 @@
-package fuentes.com.videojuego;
+package com.videojuego.modelos;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,8 +48,7 @@ public class Jugador implements Serializable{
 	 */
 	public boolean comprobarExistenciaJugador(String nombreUsuario){
        Path pathJugadores = Paths.get("fuentes/com/videojuego/jugador");
-       try{
-       		DirectoryStream<Path> flujoDatos = Files.newDirectoryStream(pathJugadores);
+       try (DirectoryStream<Path> flujoDatos = Files.newDirectoryStream(pathJugadores)) {
 
        		for(Path fichero : flujoDatos){
 				String nombreFichero = fichero.getFileName().toString();
@@ -75,8 +74,7 @@ public class Jugador implements Serializable{
 		contenidoFicheroJugador.add(new Jugador(nombreUsuario, email));
         Path rutaJugadoresRegistrados = Paths.get("fuentes/com/videojuego/jugador/" + nombreUsuario + ".bin");
 
-        try{
-        	OutputStream ficheroJugador = Files.newOutputStream(rutaJugadoresRegistrados);
+        try (OutputStream ficheroJugador = Files.newOutputStream(rutaJugadoresRegistrados)) {
 
         	ObjectOutputStream flujoSalida = new ObjectOutputStream(ficheroJugador);
 
@@ -84,8 +82,7 @@ public class Jugador implements Serializable{
 
         	System.out.println("Jugador registrado correctamente.");
 
-        }
-        catch(Exception e){
+        } catch(Exception e){
         	e.printStackTrace();
         }
 	}

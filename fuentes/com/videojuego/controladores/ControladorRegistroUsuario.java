@@ -1,6 +1,7 @@
-package fuentes.com.videojuego.controladores;
+package com.videojuego.controladores;
 
-import fuentes.com.videojuego.Jugador;
+import com.videojuego.modelos.Jugador;
+import com.videojuego.modelos.Escenario;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

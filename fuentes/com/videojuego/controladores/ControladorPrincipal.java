@@ -1,7 +1,7 @@
-package fuentes.com.videojuego.controladores;
+package com.videojuego.controladores;
 
-import fuentes.com.videojuego.Jugador;
-import recursos.com.videojuego.vistas.Vista;
+import com.videojuego.modelos.Jugador;
+import com.videojuego.modelos.Escenario;
 
 import java.util.Scanner;
 import java.nio.file.Path;
@@ -18,7 +18,7 @@ import java.util.HashMap;
  */
 public class ControladorPrincipal {
     private static Scanner teclado;
-    private Vista vista;
+    private Escenario escenario;
     private Jugador jugador;
     private int vidas = 3;
 
@@ -28,7 +28,7 @@ public class ControladorPrincipal {
      * @param jugador Instancia de la case Jugador para gestionar el usuario.
      */
     public ControladorPrincipal(Scanner teclado, Jugador jugador) {
-        this.vista = new Vista(this);
+        this.escenario = new Escenario(this);
         this.teclado = teclado;
         this.jugador = jugador;
     }
@@ -93,11 +93,11 @@ public class ControladorPrincipal {
             }
         }
 
-        vista.cargarEscenarios(rutaEscenarioElegido, opcion);
-        vista.posicionarJugador();
+        escenario.cargarEscenarios(rutaEscenarioElegido, opcion);
+        escenario.posicionarJugador();
         
         do{
-            vista.mostrarMapaConJugador();
+            escenario.mostrarMapaConJugador();
             obtenerTecla();
         }
         while(vidas > 0);
@@ -133,7 +133,7 @@ public class ControladorPrincipal {
             char tecla = teclaString.charAt(0);
 
             if (tecla == 'w' || tecla == 'a' || tecla == 's' || tecla == 'd') {
-                vista.moverJugador(tecla);
+                escenario.moverJugador(tecla);
             } else {
                 System.out.println("Tecla no válida. Usa W, A, S, D para mover.");
             }
