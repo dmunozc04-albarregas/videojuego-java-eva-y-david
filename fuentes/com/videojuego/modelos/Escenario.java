@@ -85,7 +85,7 @@ public class Escenario {
     public void posicionarJugador(){
         for(int i = 0; i < mapa.length; i++){
             for(int j = 0; j < mapa[i].length; j++){
-                if(mapa[i][j] == '_'){
+                if(mapa[i][j] == 'E'){
                     filaJugador = i;
                     columnaJugador = j;
                     return;
@@ -95,9 +95,28 @@ public class Escenario {
     }
 
     /**
+     * Método que muestra al jugador en el mapa una vez carga por priemra vez o cuando se actualice su posición
+     * en el mapa.
+     */
+    public void mostrarMapaConJugador() {
+        //limpiarConsola();
+
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[i].length; j++) {
+                if ("E".equals(mapa[i][j])) {
+                    filaJugador = i;
+                    columnaJugador = j;
+                    posicionarJugador();
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
      * Método para limpiar la consola según sea Windows o Linux. 
      */
-    public void limpiarConsola() {
+    /*public void limpiarConsola() {
          try {
              if (System.getProperty("os.name") //Obtiene información del SO en el que se ejcuta el programa. "os.name" devuelve el nombre del SO
                  .contains("Windows")) {
@@ -118,29 +137,7 @@ public class Escenario {
          } catch (IOException | InterruptedException e) {
              e.printStackTrace();  // Captura y muestra excepciones relacionadas con la interrupción del proceso
         }
-    }
-
-    /**
-     * Método que muestra al jugador en el mapa una vez carga por priemra vez o cuando se actualice su posición
-     * en el mapa.
-     */
-    public void mostrarMapaConJugador() {
-        limpiarConsola();
-
-        for (int i = 0; i < mapa.length; i++) {
-            for (int j = 0; j < mapa[i].length; j++) {
-                if (i == filaJugador && j == columnaJugador) {
-                    System.out.print('Ï');
-                } else {
-                    System.out.print(mapa[i][j]);
-                }
-            }
-            System.out.println();
-        }
-        /*if(verificarPosicion()) {
-            controlador.perderVida();
-        }*/
-    }
+    }*/
 
     /**
      * Método que recibe la tecla pulsada por el usuario y modifica sus coordenadas para moverlo a través
@@ -200,4 +197,18 @@ public class Escenario {
         return false;  
     }    
 
+    // Método para obtener el número de filas del mapa
+    public int getFilas() {
+        return mapa.length;
+    }
+
+    // Método para obtener el número de columnas del mapa
+    public int getColumnas() {
+        return mapa[0].length;
+    }
+
+    // Método para obtener el símbolo en una celda específica
+    public char getCelda(int fila, int columna) {
+        return mapa[fila][columna];
+    }
 }

@@ -22,7 +22,8 @@ import java.io.Serializable;
 public class Jugador implements Serializable{
 	private String nombreUsuario;
 	private String email;
-
+	private int fila; // Agregado: posición fila del jugador
+    private int columna; // Agregado: posición columna del jugador
 
 	/**
 	 * Constructor sin parametrizar de la clase Jugador.
@@ -30,12 +31,16 @@ public class Jugador implements Serializable{
 	public Jugador(){
 		this.nombreUsuario = nombreUsuario;
 		this.email = email;
+		this.fila = fila;
+        this.columna = columna;
 	}
 
 	/**
 	 * Constructor parametrizado de la clase Jugador.
 	 * @param nombreUsuario Nombre de usuario del jugador.
 	 * @param email Correo electrónico del jugador.
+	 * @param fila Posición fila del jugador.
+     * @param columna Posición columna del jugador.
 	 */
 	public Jugador(String nombreUsuario, String email){
 		this.nombreUsuario = nombreUsuario;
@@ -102,6 +107,20 @@ public class Jugador implements Serializable{
 	}
 
 	/**
+     * Setter para la posición fila del jugador.
+     */
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+	/**
+     * Setter para la posición columna del jugador.
+     */
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
+
+	/**
 	 * Método para obtener el nombre de usuario.
 	 */
 	public String getNombreUsuario(){
@@ -114,4 +133,20 @@ public class Jugador implements Serializable{
 	public String getEmail(){
 		return email;
 	}
+
+	/**
+     * Getter para la posición fila del jugador.
+     */
+    public int getFila() {
+        return fila;
+    }
+
+    /**
+     * Getter para la posición columna del jugador.
+     */
+    public int getColumna() {
+        return columna;
+    }
+
+
 }
