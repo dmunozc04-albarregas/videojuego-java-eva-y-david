@@ -3,6 +3,7 @@ package com.videojuego.controladores;
 import com.videojuego.modelos.Jugador;
 import com.videojuego.modelos.Escenario;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
@@ -40,6 +41,7 @@ public class ControladorAccesoUsuario {
 
         else if (jugador.comprobarExistenciaJugador(nombreUsuario)) {
             mostrarAlerta("¡Entrando al juego...");
+            ventanaControladorMenu();
         } else {
             //mostrarAlerta("El usuario no existe.");
             ventanaRegistroUsuario();
@@ -74,6 +76,27 @@ public class ControladorAccesoUsuario {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void ventanaControladorMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/videojuego/vistas/vistaMenu.fxml"));
+            Parent raizMenu = loader.load();
+
+            Scene escenaMenu = new Scene(raizMenu);
+            
+            Stage menu = new Stage();
+            menu.setScene(escenaMenu);
+            menu.setTitle("Menú juego");
+
+            menu.initModality(Modality.APPLICATION_MODAL);
+
+            menu.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("ERROR al cargar la ventana del menú.");
         }
     }
 
