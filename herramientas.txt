@@ -4,11 +4,9 @@ javac -g -d compilados --module-path C:/javafx-sdk-24/lib --add-modules javafx.f
 javac -g -d compilados --module-path C:\Users\EVA\Desktop\software\javafx-sdk-24\lib --add-modules javafx.fxml,javafx.controls fuentes/com/videojuego/App.java fuentes/com/videojuego/controladores/*.java fuentes/com/videojuego/modelos/*.java
 
 Copiar FXML
-xcopy recursos\com\videojuego\vistas\*.fxml compilados\recursos\com\videojuego\vistas\
-
-xcopy recursos\com\videojuego\vistas\*.fxml compilados\recursos\com\videojuego\vistas\ 
+xcopy "recursos\com\videojuego\" "compilados\com\videojuego\" /E /H /K
 
 Ejecutar programa FX
 java -classpath compilados --module-path C:\Users\EVA\Desktop\software\javafx-sdk-24\lib --add-modules javafx.fxml,javafx.controls com.videojuego.App
 
-java -classpath compilados --module-path C:\Users\EVA\Desktop\software\javafx-sdk-24\lib --add-modules javafx.fxml,javafx.controls com.videojuego.App 
+java -classpath compilados --module-path C:\javafx-sdk-24\lib --add-modules javafx.fxml,javafx.controls com.videojuego.App 
