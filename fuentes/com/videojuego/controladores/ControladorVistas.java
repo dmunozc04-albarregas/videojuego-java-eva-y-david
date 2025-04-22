@@ -23,6 +23,9 @@ public class ControladorVistas {
 
 	public Scene cargarVista1(){
 	   	try{
+
+	   		System.out.println(getClass().getResource("/com/videojuego/vistas/pantalla_splash.fxml"));
+
         	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/videojuego/vistas/pantalla_splash.fxml"));
         	Parent raiz = fxmlLoader.load();
 			vista1 = new Scene(raiz);
