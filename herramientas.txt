@@ -5,4 +5,4 @@ Copiar FXML
 xcopy recursos\com\videojuego\vistas\*.fxml compilados\recursos\com\videojuego\vistas\
 
 Ejecutar programa FX
-java --module-path C:/javafx-sdk-24/lib --add-modules javafx.fxml,javafx.controls -cp compilados;fuentes/recursos fuentes.com.videojuego.App
+java -classpath compilados --module-path C:\Users\EVA\Desktop\software\javafx-sdk-24\lib --add-modules javafx.fxml,javafx.controls com.videojuego.App
