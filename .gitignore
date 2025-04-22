@@ -3,6 +3,9 @@
 bin*
 compilados*
 /compilados/
+/fuentes/com/videojuego/jugador/
+/fuentes/com/videojuego/config.txt
+/fuentes/com/videojuego/partida/
 
 # Log file
 *.log
