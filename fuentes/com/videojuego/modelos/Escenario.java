@@ -2,6 +2,13 @@ package com.videojuego.modelos;
 
 import com.videojuego.controladores.ControladorPrincipal;
 
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
@@ -14,68 +21,77 @@ import java.util.List;
  * Licencia GPL v3. Fecha 03 2025
  */
 public class Escenario {
-    
-    private static char[][] mapa = null;
-    private static Integer filaJugador;
-    private static Integer columnaJugador;
-    private ControladorPrincipal controlador;
+    private static int ancho;
+    private static int alto;
+    private StackPane[][] mapa;
+    private static final int LADO = 128;
 
-    public Escenario(ControladorPrincipal controlador) {
-        this.controlador = controlador;
+    private int filaJugador;
+    private int columnaJugador;
+
+    private Image imgEscenario;
+
+    public Escenario(Path rutaEscenario, Integer opcion) {
+        imgEscenario = new Image(this.getClass().getResourceAsStream("/escenario.png"));
+        cargarEscenarios(rutaEscenario, opcion);
     }
 
     /**
      * Método para cargar varios escenarios.
-     * @param rutaEscenario Lista de rutas de los arhivos de escenarios.
+     * @param rutaEscenarios Lista de rutas de los arhivos de escenarios.
      */
     public void cargarEscenarios(Path rutaEscenario, Integer opcion) {
-            int obstaculos = 0;
-            int espacios = 0;
-            int borde = 0;
-            int guion = 0;
+        int espacios = 0;
+        int obstaculos = 0;
+        int bordeSuperior = 0;
+        int bordeInferior = 0;
+        int bordeIzquierdo = 0;
+        int bordeDerecho = 0;
+        try {
+            List<String> archivoEscenario = Files.readAllLines(rutaEscenario);
+            
+            String[] dimensiones = archivoEscenario.get(0).split(" ");
+            ancho = Integer.parseInt(dimensiones[0]);
+            alto = Integer.parseInt(dimensiones[1]);
 
-            try {
-                List<String> archivoEscenario = Files.readAllLines(rutaEscenario);
-                mapa = new char[archivoEscenario.size()][];
+            mapa = new StackPane[alto][ancho];
               
-                for (int i = 0; i < archivoEscenario.size(); i++) {
-                    String linea = archivoEscenario.get(i);
-                    String[] partes = linea.split(" ");
-                    StringBuilder fila = new StringBuilder();
+            for (int i = 1; i < alto; i++) {
+                String linea = archivoEscenario.get(i);
+                String[] partes = linea.split(" ");
+                for(int j = 0; j < ancho; j++) {
+                    String parte = partes[j];
+                    int cantidad = Integer.parseInt(parte.substring(0, parte.length() - 1));
+                    char casilla = parte.charAt(parte.length() - 1);
+                    Rectangle2D recorte = getRecortePorCasilla(casilla);
 
-                    for(String parte : partes) {
-                        int cantidad = Integer.valueOf(parte.substring(0, parte.length() - 1));
-                        char tipo = parte.charAt(parte.length() - 1);
 
-                        char simbolo = ' ';
+                        for (int k = 0; k < cantidad; k++) {
+                            ImageView baldosa = new ImageView(imgEscenario);
 
-                        switch(tipo) {
-                            case 'E': simbolo = '_';
-                                espacios += cantidad;
-                                break;
-                            case 'O': simbolo = '¬';
-                                obstaculos += cantidad;
-                                break;
-                            case 'B': simbolo = '|'; 
-                                borde += cantidad;
-                                break;
-                            case 'G': simbolo = '-';
-                                guion += cantidad;
-                                break;
-                            default:
-                                simbolo = ' ';
-                                break;
-                        }
+                            baldosa.setViewport(recorte);
+                            baldosa.setFitWidth(LADO);
+                            baldosa.setFitHeight(LADO);
 
-                        //Agregamos el símbolo a la fila tanta veces como indique cantidad. 
-                        for(int j = 0; j < cantidad; j++) {
-                            fila.append(simbolo); //Método de la clase StringBuilder. Añadimos el símbolo a la fila.
+                            StackPane celda = new StackPane(baldosa);
+                            mapa[i][j] = celda;
                         }
                     }
-                    mapa[i] = fila.toString().toCharArray();
                 }
             } catch (IOException e) {
                 e.printStackTrace();            
+        }
+    }
+
+    private Rectangle2D getRecortePorCasilla(char casilla) {
+        switch (casilla) {
+            case 'E': return new Rectangle2D(2*LADO, 0*LADO, LADO, LADO);
+            case 'O': return new Rectangle2D(4*LADO, 2*LADO, LADO, LADO);
+            case 'A': return new Rectangle2D(1*LADO, 5*LADO, LADO, LADO);
+            case 'B': return new Rectangle2D(1*LADO, 3*LADO, LADO, LADO);
+            case 'I': return new Rectangle2D(2*LADO, 4*LADO, LADO, LADO);
+            case 'D': return new Rectangle2D(0*LADO, 4*LADO, LADO, LADO);
+            default: return new Rectangle2D(0, 0, LADO, LADO);  // Casilla por defecto
         }
     }
    
@@ -85,7 +101,7 @@ public class Escenario {
     public void posicionarJugador(){
         for(int i = 0; i < mapa.length; i++){
             for(int j = 0; j < mapa[i].length; j++){
-                if(mapa[i][j] == 'E'){
+                if(getCelda(i, j) == 'E'){
                     filaJugador = i;
                     columnaJugador = j;
                     return;
@@ -99,45 +115,24 @@ public class Escenario {
      * en el mapa.
      */
     public void mostrarMapaConJugador() {
-        //limpiarConsola();
-
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa[i].length; j++) {
-                if ("E".equals(mapa[i][j])) {
-                    filaJugador = i;
-                    columnaJugador = j;
-                    posicionarJugador();
+                if (i == filaJugador && j == columnaJugador) {
+                    ImageView ivjugador = new ImageView(new Image(getClass().getResourceAsStream("/jugador.png")));
+                    ivjugador.setFitWidth(60);
+                    ivjugador.setPreserveRatio(true);
+                    Rectangle2D vpJugador = new Rectangle2D(3*128, 1*160, 128, 160);
+                    ivjugador.setViewport(vpJugador);
+
+                    StackPane celda = mapa[i][j];
+                    celda.getChildren().clear();  
+                    celda.getChildren().add(ivjugador);  
+
                     return;
                 }
             }
         }
     }
-
-    /**
-     * Método para limpiar la consola según sea Windows o Linux. 
-     */
-    /*public void limpiarConsola() {
-         try {
-             if (System.getProperty("os.name") //Obtiene información del SO en el que se ejcuta el programa. "os.name" devuelve el nombre del SO
-                 .contains("Windows")) {
-                 // Para sistemas Windows
-                 //Clase para crear y gestionar procesos del SO desde un programa java
-                 //Ejecutamos el comando cmd.
-                 //"/c"Le  dice al cmd que ejecute el comando que sigue y luego termine.
-                 //"csl" es el comando que se ejecuta.
-                new ProcessBuilder("cmd", "/c", "cls")
-                    .inheritIO()        //Cualquier salida de cls se muestra en la consola de java.
-                    .start()            //Inicia el proceso de ProcessBuilder(cmd /c cls)            
-                    .waitFor();         //Hace que el programa java espere hasta que termina la ejecución para limpiar la pantalla.
-             } else {
-                 // Para sistemas Unix/Linux/Mac
-                 System.out.print("\033[H\033[2J"); //\033 carácter de escape [H mueve el cursor al inicio \033[2J borra toda la pantalla.
-                 System.out.flush();   //Se asegura que todo lo que está en el buffer de salida se envia a la consola. 
-             }
-         } catch (IOException | InterruptedException e) {
-             e.printStackTrace();  // Captura y muestra excepciones relacionadas con la interrupción del proceso
-        }
-    }*/
 
     /**
      * Método que recibe la tecla pulsada por el usuario y modifica sus coordenadas para moverlo a través
@@ -171,9 +166,10 @@ public class Escenario {
                 break;
         }
         // Verifica si la nueva posición tiene un obstáculo
-        if (!verificarPosicion(nuevaFila, nuevaColumna)) {
+        if (verificarPosicion(nuevaFila, nuevaColumna)) {
             filaJugador = nuevaFila;
             columnaJugador = nuevaColumna;
+            mostrarMapaConJugador();
         }
     }
 
@@ -181,21 +177,39 @@ public class Escenario {
      * Método para verificar que si el jugador colisiona con un obstáculo o marco
      * activa la función para eliminar vida del jugador.
      */
-    public boolean verificarPosicion(Integer fila, Integer columna) {
-        char simbolo = mapa[fila][columna];
-        if (simbolo == '|' || simbolo == '¬' || simbolo == '-') {
+    public boolean verificarPosicion(int fila, int columna) {
+        StackPane celda = mapa[fila][columna];
+        ImageView baldosa = (ImageView) celda.getChildren().get(0);
+
+        Rectangle2D recorte = (Rectangle2D) baldosa.getViewport();
+
+        if (esObstaculo(recorte)) {
             System.out.println("¡Te has encontrado con un obstáculo! Pierdes una vida.");
-            controlador.perderVida();
-            try {
-            Thread.sleep(1000);  // 2000 milisegundos = 2 segundos
+
+        // Pausa para que el jugador vea la colisión
+        /*try {
+            Thread.sleep(1000);  // 1000 milisegundos = 1 segundo
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-            return true;
+        }*/
 
+        return true;  
         }
-        return false;  
+        return false; 
     }    
+
+    /**
+    * Método para verificar si el recorte corresponde a un obstáculo o borde.
+    * @param recorte El recorte de la celda.
+    * @return true si el recorte es de un obstáculo, false si no.
+    */
+    private boolean esObstaculo(Rectangle2D recorte) {
+        return (recorte.getMinX() == 4*LADO && recorte.getMinY() == 2*LADO) || 
+                (recorte.getMinX() == 1*LADO && recorte.getMinY() == 5*LADO) || 
+                (recorte.getMinX() == 1*LADO && recorte.getMinY() == 3*LADO) || 
+                (recorte.getMinX() == 2*LADO && recorte.getMinY() == 4*LADO) || 
+                (recorte.getMinX() == 0*LADO && recorte.getMinY() == 4*LADO);   
+    }
 
     // Método para obtener el número de filas del mapa
     public int getFilas() {
@@ -209,6 +223,24 @@ public class Escenario {
 
     // Método para obtener el símbolo en una celda específica
     public char getCelda(int fila, int columna) {
-        return mapa[fila][columna];
+        StackPane celda = mapa[fila][columna];
+        ImageView baldosa = (ImageView) celda.getChildren().get(0);
+        Rectangle2D recorte = (Rectangle2D) baldosa.getViewport();
+    
+        if (recorte.getMinX() == 2 * LADO && recorte.getMinY() == 0 * LADO) {
+            return 'E'; // Espacio vacío
+        } else if (recorte.getMinX() == 4 * LADO && recorte.getMinY() == 2 * LADO) {
+            return 'O'; // Obstáculo
+        } else if (recorte.getMinX() == 1 * LADO && recorte.getMinY() == 5 * LADO) {
+            return 'A'; // Borde superior
+        } else if (recorte.getMinX() == 1 * LADO && recorte.getMinY() == 3 * LADO) {
+            return 'B'; // Borde inferior
+        } else if (recorte.getMinX() == 2 * LADO && recorte.getMinY() == 4 * LADO) {
+            return 'I'; // Borde izquierdo
+        } else if (recorte.getMinX() == 0 * LADO && recorte.getMinY() == 4 * LADO) {
+            return 'D'; // Borde derecho
+        } else {
+            return ' '; // Caso por defecto (vacío o no reconocido)
+    }
     }
 }

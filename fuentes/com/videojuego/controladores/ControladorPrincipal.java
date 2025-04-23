@@ -28,7 +28,7 @@ public class ControladorPrincipal {
      * @param jugador Instancia de la case Jugador para gestionar el usuario.
      */
     public ControladorPrincipal(Scanner teclado, Jugador jugador) {
-        this.escenario = new Escenario(this);
+        //this.escenario = new Escenario(this);
         this.teclado = teclado;
         this.jugador = jugador;
     }

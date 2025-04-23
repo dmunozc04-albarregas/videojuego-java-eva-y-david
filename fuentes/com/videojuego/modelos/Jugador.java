@@ -147,6 +147,4 @@ public class Jugador implements Serializable{
     public int getColumna() {
         return columna;
     }
-
-
 }

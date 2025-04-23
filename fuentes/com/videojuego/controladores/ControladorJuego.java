@@ -1,5 +1,6 @@
 package com.videojuego.controladores;
 
+import com.videojuego.modelos.Escenario;
 import com.videojuego.modelos.Jugador;
 
 import javafx.fxml.FXML;
@@ -14,11 +15,21 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class ControladorJuego {
+    private Jugador jugador;
+    private Escenario escenario;
+    private int nivel;
 
     @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private Text nivelTexto;
+    /*@FXML
     private GridPane grid; 
 
     private Stage ventana;
@@ -34,13 +45,13 @@ public class ControladorJuego {
     private StackPane[][] stackPanes; 
     private Image imgEscenario;
     //private ImageView ivPersonaje;
-
+*/
     public ControladorJuego() {}
 
-    public ControladorJuego(Jugador jugador, int nivel) {
+    /*public ControladorJuego(Jugador jugador, int nivel) {
         this.jugador = jugador;
         this.nivel = nivel;
-    }
+    }*/
 
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
@@ -49,7 +60,7 @@ public class ControladorJuego {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-
+/*
     public void inicializarJuego() {
         stackPanes = new StackPane[filas][cols];
         imgEscenario = new Image(this.getClass().getResourceAsStream("escenario.png"));
@@ -57,7 +68,7 @@ public class ControladorJuego {
         dibujarMapa();
     }
 
-    /*public void iniciarVentana() {
+    public void iniciarVentana() {
         this.ventana = ventana;
         stackPanes = new StackPane[filas][cols];
         imgEscenario = new Image(this.getClass().getResourceAsStream("/com/videojuego/imagenes/escenario.png")); 
@@ -73,7 +84,7 @@ public class ControladorJuego {
         //configurarEscena();
         //mostrarMapaConJugador();
     }*/
-
+/*
     private void crearGrid() {
         for (int i = 0; i < filas; i++) {
             grid.getRowConstraints().add(new RowConstraints());
@@ -149,5 +160,5 @@ public class ControladorJuego {
             System.exit(-1);
         }
         return vista;
-    }
+    }*/
 }

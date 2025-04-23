@@ -53,7 +53,7 @@ public class ControladorMenu {
             ControladorJuego controladorJuego = loader.getController();
             controladorJuego.setJugador(jugador);
             controladorJuego.setNivel(nivel);
-            controladorJuego.inicializarJuego();
+            //controladorJuego.inicializarJuego();
 
             // Crear nueva ventana
             stage.setScene(new Scene(root));
