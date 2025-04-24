@@ -17,6 +17,7 @@ import java.util.Objects;
 public class ControladorJuego {
     private Jugador jugador;
     private Escenario escenario;
+    private int nivel;
     
     @FXML
     private GridPane gridEscenario;
@@ -26,6 +27,10 @@ public class ControladorJuego {
 
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
     }
 
     public void cargarEscenario(Path rutaEscenario, int nivel) {

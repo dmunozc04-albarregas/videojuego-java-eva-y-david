@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class ControladorMenu {
     private Jugador jugador = new Jugador();
+    int nivel;
 
     @FXML
     private Button btnNivel1;
@@ -33,16 +34,34 @@ public class ControladorMenu {
         this.jugador = jugador;
     }
 
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
     @FXML
     private void seleccionarNivel(ActionEvent event) {
         Button boton = (Button) event.getSource();
-        //int nivel = Integer.parseInt(boton.getText().replace("Nivel ", ""));
-        int nivel;
+        int nivel = Integer.parseInt(boton.getText().replace("Nivel ", ""));
+        //int nivel;
 
         Stage stage = (Stage) boton.getScene().getWindow();
 
         if(boton == btnNivel1) {
             iniciarJuego(1, stage);
+        }
+
+        if(boton == btnNivel2) {
+            iniciarJuego(2, stage);
+        }
+        if(boton == btnNivel3) {
+            iniciarJuego(3, stage);
+        }
+        if(boton == btnNivel4) {
+            iniciarJuego(4, stage);
         }
     }
 
@@ -55,8 +74,7 @@ public class ControladorMenu {
             // Obtener el controlador del juego
             ControladorJuego controladorJuego = loader.getController();
             controladorJuego.setJugador(jugador);
-            //controladorJuego.setNivel(nivel);
-            //controladorJuego.inicializarJuego();
+            setNivel(nivel);
 
             // Crear nueva ventana
             stage.setScene(new Scene(root));

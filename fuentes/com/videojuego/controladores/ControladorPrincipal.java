@@ -20,7 +20,8 @@ public class ControladorPrincipal {
     private static Scanner teclado;
     private Escenario escenario;
     private Jugador jugador;
-    private int vidas = 3;
+    private ControladorMenu controladorMenu;
+    //private int vidas = 3;
 
     /**
      * Contructor de la clase Controlador.
@@ -38,8 +39,9 @@ public class ControladorPrincipal {
      */
     public void iniciarJuego() {
 
-        mostrarMenu();
-        Integer opcion = solicitarOpcion();
+        //mostrarMenu();
+        //Integer opcion = solicitarOpcion();
+        Integer opcion = controladorMenu.getNivel();
 
         Map<String,Path> rutasEscenarios = new HashMap<>();
         rutasEscenarios.put("nivel 1",Paths.get("escenarios/escenario1.txt"));
@@ -57,22 +59,22 @@ public class ControladorPrincipal {
         escenario.cargarEscenarios(rutaEscenarioElegido, opcion);
         escenario.posicionarJugador();
         
-        do{
+        //do{
             escenario.mostrarMapaConJugador();
             obtenerTecla();
-        }
-        while(vidas > 0);
+        //}
+        //while(vidas > 0);
     }
 
     /**
      * Método para mostrar los diferentes niveles posibles para jugar
      */
-    public void mostrarMenu(){
+  /*  public void mostrarMenu(){
         System.out.println("1. Nivel 1");
         System.out.println("2. Nivel 2");
         System.out.println("3. Nivel 3");
         System.out.println("4. Nivel 4");
-    }
+    }*/
 
     /**
      * Método que recoge la tecla introducida por el usuario para poder saber a que posición mover el usuario.
@@ -104,7 +106,7 @@ public class ControladorPrincipal {
     /**
      * Pierde una vida y verifica si el juego ha terminado.
      */
-    public void perderVida() {
+  /*  public void perderVida() {
         vidas--;
         System.out.println("¡Has perdido una vida! Vidas restantes: " + vidas);
         
@@ -112,12 +114,12 @@ public class ControladorPrincipal {
             System.out.println("¡Has perdido todas tus vidas! Fin de la partida.");
             System.exit(0);
         }
-    }
+    }*/
 
     /**
      * Método que solicita al usuario el nivel a elegir.
      */
-    public Integer solicitarOpcion(){
+   /* public Integer solicitarOpcion(){
         Integer opcion = 0;
         boolean correcto = false;
 
@@ -134,5 +136,5 @@ public class ControladorPrincipal {
         }while(!correcto);
 
         return opcion;
-    }  
+    }  */
 }
