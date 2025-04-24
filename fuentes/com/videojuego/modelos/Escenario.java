@@ -95,7 +95,7 @@ public class Escenario {
                             baldosa.setFitHeight(LADO);
 
                             StackPane celda = new StackPane(baldosa);
-                            mapa[i][j].getChildren().add(celda);
+                            mapa[i][j] = celda;
                         }
                     }
                 }
@@ -127,14 +127,14 @@ public class Escenario {
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa[i].length; j++) {
                 if (i == filaJugador && j == columnaJugador) {
-                    ImageView ivjugador = new ImageView(new Image(getClass().getResourceAsStream("../recursos/com/videojuego/jugador.png")));
+                    ImageView ivjugador = new ImageView(new Image(getClass().getResourceAsStream("/jugador.png")));
                     ivjugador.setFitWidth(60);
                     ivjugador.setPreserveRatio(true);
                     Rectangle2D vpJugador = new Rectangle2D(3*128, 1*160, 128, 160);
                     ivjugador.setViewport(vpJugador);
 
                     StackPane celda = mapa[i][j];
-                    celda.getChildren().setAll(ivjugador); 
+                    celda.getChildren().clear();  
                     celda.getChildren().add(ivjugador);  
 
                     return;

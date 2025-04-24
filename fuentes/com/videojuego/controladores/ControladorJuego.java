@@ -4,7 +4,6 @@ import com.videojuego.modelos.Escenario;
 import com.videojuego.modelos.Jugador;
 
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -37,24 +36,18 @@ public class ControladorJuego {
     public void cargarEscenario(Path rutaEscenario, int nivel) {
         escenario = new Escenario(rutaEscenario, nivel);
 
-        //gridEscenario.getChildren().clear();
-        //gridEscenario.getColumnConstraints().clear();
-        //gridEscenario.getRowConstraints().clear();
+        gridEscenario.getChildren().clear();
+        gridEscenario.getColumnConstraints().clear();
+        gridEscenario.getRowConstraints().clear();
 
 
         int filas = escenario.getFilas();
         int columnas = escenario.getColumnas();
 
         for (int i = 0; i < filas; i++) {
-            gridEscenario.getRowConstraints().add(new RowConstraints());
-        }
-
-        for (int i = 0; i < columnas; i++) {
-            gridEscenario.getColumnConstraints().add(new ColumnConstraints());
-        }
-
-        for (int i = 0; i < filas; i++) {
+            gridEscenario.getRowConstraints().add(new RowConstraints(60));
             for (int j = 0; j < columnas; j++) {
+                if (i == 0) gridEscenario.getColumnConstraints().add(new ColumnConstraints(60));
                 StackPane celda = escenario.getCeldaVista(i, j);
                 gridEscenario.add(celda, j, i);
             }
