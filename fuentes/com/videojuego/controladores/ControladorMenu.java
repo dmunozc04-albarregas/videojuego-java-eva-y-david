@@ -55,7 +55,7 @@ public class ControladorMenu {
             // Obtener el controlador del juego
             ControladorJuego controladorJuego = loader.getController();
             controladorJuego.setJugador(jugador);
-            controladorJuego.setNivel(nivel);
+            //controladorJuego.setNivel(nivel);
             //controladorJuego.inicializarJuego();
 
             // Crear nueva ventana

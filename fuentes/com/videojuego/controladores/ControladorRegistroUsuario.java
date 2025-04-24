@@ -41,7 +41,12 @@ public class ControladorRegistroUsuario{
         if (nombreUsuario.isEmpty() || correoUsuario.isEmpty()) {
             mostrarAlerta("Por favor, introduza un nombre de usuario / email.");
             return;
-        } else {
+        } 
+        else if(!correoUsuario.contains("@")){
+            mostrarAlerta("Correo no válido, asegúrate que contiene un @");
+            return;
+        }
+        else {
             jugador.crearJugador(nombreUsuario, correoUsuario);
             mostrarAlerta("Jugador creado correctamente, entrando al juego...");
         }

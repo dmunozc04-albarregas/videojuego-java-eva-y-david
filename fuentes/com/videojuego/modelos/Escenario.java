@@ -252,4 +252,9 @@ public class Escenario {
             return ' '; // Caso por defecto (vacío o no reconocido)
         }
     }
+
+    public StackPane getCeldaVista(int fila, int columna) {
+        return mapa[fila][columna];
+    }
+
 }

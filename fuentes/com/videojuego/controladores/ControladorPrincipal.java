@@ -32,50 +32,11 @@ public class ControladorPrincipal {
         this.teclado = teclado;
         this.jugador = jugador;
     }
-
-    /**
-     * Solicita al usuario su nombre y lo almacena en el objeto Jugador.
-     */
-    public void pedirNombreUsuario() {
-        String nombreUsuario;
-        do {
-            System.out.print("Introduce tu nombre de usuario: ");
-            nombreUsuario = teclado.nextLine();
-            if (nombreUsuario.isEmpty()) {
-                System.out.println("El nombre de usuario no puede estar vacío. Inténtalo de nuevo.");
-            }
-        } while (nombreUsuario.isEmpty());
-
-        jugador.setNombreUsuario(nombreUsuario); 
-    }
-
-    /**
-     * Solicita al usuario su correo y lo almacena en el objeto Jugador.
-     * Se valida que el correo contenga '@'.
-     */
-    public void pedirCorreo() {
-        String correo;
-        do {
-            System.out.print("No estás registrado. Introduce tu correo: ");
-            correo = teclado.nextLine();
-            if (!correo.contains("@")) {
-                System.out.println("Correo no válido. Asegúrate de que contiene '@'.");
-            }
-        } while (!correo.contains("@"));
-
-        jugador.setEmail(correo);
-    }
-
      /**
      * Inicia el flujo del juego: pide el nombre del usuario, verifica si está registrado
      * y, en caso contrario, le solicita el correo y lo guarda. Luego, carga los escenarios.
      */
     public void iniciarJuego() {
-        pedirNombreUsuario();
-        if(!this.jugador.comprobarExistenciaJugador(jugador.getNombreUsuario())) {
-            pedirCorreo();
-            jugador.crearJugador(jugador.getNombreUsuario(), jugador.getEmail());
-        }
 
         mostrarMenu();
         Integer opcion = solicitarOpcion();
