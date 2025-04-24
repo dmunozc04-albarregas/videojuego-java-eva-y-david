@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ControladorMenu {
-    private Jugador jugador;
+    private Jugador jugador = new Jugador();
 
     @FXML
     private Button btnNivel1;
@@ -36,17 +36,20 @@ public class ControladorMenu {
     @FXML
     private void seleccionarNivel(ActionEvent event) {
         Button boton = (Button) event.getSource();
-        int nivel = Integer.parseInt(boton.getText().replace("Nivel ", ""));
-        
+        //int nivel = Integer.parseInt(boton.getText().replace("Nivel ", ""));
+        int nivel;
+
         Stage stage = (Stage) boton.getScene().getWindow();
-        
-        iniciarJuego(nivel, stage);
+
+        if(boton == btnNivel1) {
+            iniciarJuego(1, stage);
+        }
     }
 
     private void iniciarJuego(int nivel, Stage stage) {
         try {
             // Cargar la vista del juego
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/videojuego/vistas/vistaJuego.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/videojuego/vistas/nivel1.fxml"));
             Parent root = loader.load();
 
             // Obtener el controlador del juego

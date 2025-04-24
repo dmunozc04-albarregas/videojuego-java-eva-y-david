@@ -21,7 +21,7 @@ import java.util.List;
 import java.io.IOException;
 
 public class ControladorJuego {
-    private Jugador jugador;
+    private Jugador jugador = new Jugador();
     private Escenario escenario;
     private ControladorPrincipal controladorPrincipal;
     private Image imgEscenario;
@@ -31,7 +31,8 @@ public class ControladorJuego {
     private int cols;
 
     private Stage ventana;
-    private Scene nivel1, nivel2, nivel3, nivel4;
+    private int nivel;
+    private Scene nivelVentana;
     
     @FXML
     private GridPane gridEscenario;
@@ -41,6 +42,8 @@ public class ControladorJuego {
 
     @FXML
     private Text nivelTexto;
+
+    public ControladorJuego() {}
     
     public ControladorJuego(ControladorPrincipal controladorPrincipal) {
         this.controladorPrincipal = controladorPrincipal;
@@ -63,22 +66,17 @@ public class ControladorJuego {
     }
 
     public void setNivel(int nivel) {
-         switch(nivel) {
-            case 1: ventana.setScene(nivel1); break;
-            case 2: ventana.setScene(nivel2); break;
-            case 3: ventana.setScene(nivel3); break;
-            case 4: ventana.setScene(nivel4); break;
-            default: break;
-        }
+         this.nivel = nivel;
+    }
+
+    public void setNivel(Scene nivelVentana) {
+         this.nivel = nivel;
     }
 
     public ControladorJuego(Stage ventana){
         this.ventana = ventana;
 
-        nivel1 = cargarVista(this, "nivel1");
-        nivel2 = cargarVista(this, "nivel2");
-        nivel3 = cargarVista(this, "nivel3");
-        nivel4 = cargarVista(this, "nivel4");
+        nivelVentana = cargarVista(this);
 
         crearGrid();
     }
@@ -107,13 +105,13 @@ public class ControladorJuego {
     }
 
     private void configurarEscena1(Stage ventana) {
-        nivel1 = cargarVista(this, "nivel1");
+        nivelVentana = cargarVista(this);
         
-        ventana.setScene(nivel1);
+        ventana.setScene(nivelVentana);
         ventana.show();
     }
 
-    private void configurarEscena2(Stage ventana) {
+   /* private void configurarEscena2(Stage ventana) {
         nivel2 = cargarVista(this, "nivel2");
         
         ventana.setScene(nivel2);
@@ -132,20 +130,20 @@ public class ControladorJuego {
         
         ventana.setScene(nivel4);
         ventana.show();
-    }
+    }*/
 
-    private Scene cargarVista(ControladorJuego controlador, String nombreVista) {
-        final String PATH_VISTAS = "../vistas/";
+    private Scene cargarVista(ControladorJuego controlador) {
+        final String PATH_VISTAS = "../recursos/com/videojuego/vistas/";
         Scene vista = null;
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(ControladorPrincipal.class.getResource(PATH_VISTAS + nombreVista + ".fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(ControladorPrincipal.class.getResource(PATH_VISTAS + "nivel1.fxml"));
             fxmlLoader.setController(controlador);
             Parent raiz = fxmlLoader.load();
             vista = new Scene(raiz);
         }
         catch(IOException e){
             e.printStackTrace();
-            System.out.println("ERROR FATAL. No se encuentra la vista " + nombreVista + ".");
+            System.out.println("ERROR FATAL. No se encuentra la vista.");
             System.exit(-1);
         }
         return vista;
