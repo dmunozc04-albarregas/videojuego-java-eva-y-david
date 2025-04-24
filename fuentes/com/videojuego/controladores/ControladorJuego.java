@@ -40,6 +40,7 @@ public class ControladorJuego {
         gridEscenario.getColumnConstraints().clear();
         gridEscenario.getRowConstraints().clear();
 
+
         int filas = escenario.getFilas();
         int columnas = escenario.getColumnas();
 
@@ -54,7 +55,12 @@ public class ControladorJuego {
 
         escenario.posicionarJugador();
         escenario.mostrarMapaConJugador();
-        nivelTexto.setText("Nivel " + nivel);
+    }
+
+    public void actualizarTextoNivel(int nivel) {
+        if (nivelTexto != null) {
+            nivelTexto.setText("Nivel " + nivel);
+        }
     }
 
     // Tecla pulsada para mover jugador

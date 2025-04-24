@@ -10,10 +10,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.text.Text;
 
 public class ControladorMenu {
     private Jugador jugador = new Jugador();
+    private ControladorJuego controladorJuego;
     int nivel;
+
+    @FXML
+    private Text nivelTexto;
 
     @FXML
     private Button btnNivel1;
@@ -72,9 +77,11 @@ public class ControladorMenu {
             Parent root = loader.load();
 
             // Obtener el controlador del juego
-            ControladorJuego controladorJuego = loader.getController();
+            controladorJuego = loader.getController();
             controladorJuego.setJugador(jugador);
             setNivel(nivel);
+
+            controladorJuego.actualizarTextoNivel(nivel);
 
             // Crear nueva ventana
             stage.setScene(new Scene(root));
