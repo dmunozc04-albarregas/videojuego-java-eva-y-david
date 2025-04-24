@@ -86,6 +86,7 @@ public class ControladorMenu {
             // Crear nueva ventana
             stage.setScene(new Scene(root));
             stage.setTitle("Juego - Nivel " + nivel);
+            stage.centerOnScreen();
             stage.show();
 
         } catch (IOException e) {
