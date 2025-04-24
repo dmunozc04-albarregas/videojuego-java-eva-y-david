@@ -17,80 +17,79 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import java.util.List;
 import java.io.IOException;
 
 public class ControladorJuego {
     private Jugador jugador;
     private Escenario escenario;
-    private int nivel;
+    private ControladorPrincipal controladorPrincipal;
+    private Image imgEscenario;
+    private StackPane[][] stackPanes;
+    
+    private int filas;
+    private int cols;
+
+    private Stage ventana;
+    private Scene nivel1, nivel2, nivel3, nivel4;
+    
+    @FXML
+    private GridPane gridEscenario;
 
     @FXML
     private AnchorPane rootPane;
 
     @FXML
     private Text nivelTexto;
-    /*@FXML
-    private GridPane grid; 
-
-    private Stage ventana;
-    private Scene vistaJuego;
     
-    private Jugador jugador;
-    private int nivel;
+    public ControladorJuego(ControladorPrincipal controladorPrincipal) {
+        this.controladorPrincipal = controladorPrincipal;
 
-    private Integer filas = 10; 
-    private Integer cols = 10;
-    private static final Integer LADO = 128;
+        /*List<String> archivoEscenario = controladorPrincipal.iniciarJuego();
+        String[] dimensiones = archivoEscenario.get(0).split(" ");
+        filas = Integer.parseInt(dimensiones[0]);
+        cols = Integer.parseInt(dimensiones[1]);*/
 
-    private StackPane[][] stackPanes; 
-    private Image imgEscenario;
-    //private ImageView ivPersonaje;
-*/
-    public ControladorJuego() {}
+        imgEscenario = new Image(getClass().getResourceAsStream("/imagenes/escenario.png")); // <-- AQUÍ
 
-    /*public ControladorJuego(Jugador jugador, int nivel) {
+    }
+
+    public ControladorJuego(Jugador jugador) {
         this.jugador = jugador;
-        this.nivel = nivel;
-    }*/
+    }
 
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
     }
 
     public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-/*
-    public void inicializarJuego() {
-        stackPanes = new StackPane[filas][cols];
-        imgEscenario = new Image(this.getClass().getResourceAsStream("escenario.png"));
-        crearGrid();
-        dibujarMapa();
+         switch(nivel) {
+            case 1: ventana.setScene(nivel1); break;
+            case 2: ventana.setScene(nivel2); break;
+            case 3: ventana.setScene(nivel3); break;
+            case 4: ventana.setScene(nivel4); break;
+            default: break;
+        }
     }
 
-    public void iniciarVentana() {
+    public ControladorJuego(Stage ventana){
         this.ventana = ventana;
-        stackPanes = new StackPane[filas][cols];
-        imgEscenario = new Image(this.getClass().getResourceAsStream("/com/videojuego/imagenes/escenario.png")); 
 
-        vistaJuego = cargarVista(this, "vistaJuego"); 
-        ventana = new Stage(); 
-        ventana.setScene(vistaJuego);
-        ventana.setTitle("Juego - Nivel " + nivel);
-        ventana.show();
+        nivel1 = cargarVista(this, "nivel1");
+        nivel2 = cargarVista(this, "nivel2");
+        nivel3 = cargarVista(this, "nivel3");
+        nivel4 = cargarVista(this, "nivel4");
 
         crearGrid();
-        dibujarMapa();
-        //configurarEscena();
-        //mostrarMapaConJugador();
-    }*/
-/*
+    }
+
     private void crearGrid() {
+        stackPanes = new StackPane[filas][cols];
         for (int i = 0; i < filas; i++) {
-            grid.getRowConstraints().add(new RowConstraints());
+            gridEscenario.getRowConstraints().add(new RowConstraints());
         }
         for (int j = 0; j < cols; j++) {
-            grid.getColumnConstraints().add(new ColumnConstraints());
+            gridEscenario.getColumnConstraints().add(new ColumnConstraints());
         }
         // Crear celdas como StackPane con imagen base
         for (int i = 0; i < filas; i++) {
@@ -101,47 +100,37 @@ public class ControladorJuego {
                 base.setFitHeight(60);
                 base.setPreserveRatio(true);
                 stack.getChildren().add(base);
-                grid.add(stack, j, i);
+                gridEscenario.add(stack, j, i);
                 stackPanes[i][j] = stack;
             }
         }
     }
 
-    private void dibujarMapa() {
-        ponerCelda(0, 0, obtenerViewport('A'));
-        ponerCelda(0, cols - 1, obtenerViewport('B'));
-        ponerCelda(filas - 1, 0, obtenerViewport('I')); 
-        ponerCelda(filas - 1, cols - 1, obtenerViewport('D')); 
-
-        for (int i = 1; i < filas - 1; i++) {
-            for (int j = 1; j < cols - 1; j++) {
-                ponerCelda(i, j, obtenerViewport('E'));
-            }
-        }
-    }
-
-    private void ponerCelda(int fila, int columna, Rectangle2D viewport) {
-        ImageView imagen = (ImageView) stackPanes[fila][columna].getChildren().get(0);
-        imagen.setViewport(viewport);
-    }
-
-    private Rectangle2D obtenerViewport(char tipo) {
-        switch (tipo) {
-            case 'A': return new Rectangle2D(1 * LADO, 3 * LADO, LADO, LADO); 
-            case 'B': return new Rectangle2D(1 * LADO, 3 * LADO, LADO, LADO); 
-            case 'I': return new Rectangle2D(2 * LADO, 4 * LADO, LADO, LADO); 
-            case 'D': return new Rectangle2D(2 * LADO, 4 * LADO, LADO, LADO); 
-            case 'O': return new Rectangle2D(4 * LADO, 2 * LADO, LADO, LADO);
-            case 'E': return new Rectangle2D(5 * LADO, 2 * LADO, LADO, LADO); 
-            default: return new Rectangle2D(5 * LADO, 2 * LADO, LADO, LADO); 
-        }
-    }
-
-    private void configurarEscena(Stage ventana) {
-        vistaJuego = cargarVista(this, "vistaJuego");
+    private void configurarEscena1(Stage ventana) {
+        nivel1 = cargarVista(this, "nivel1");
         
-        ventana.setScene(vistaJuego);
-        ventana.setTitle("Laberinto");
+        ventana.setScene(nivel1);
+        ventana.show();
+    }
+
+    private void configurarEscena2(Stage ventana) {
+        nivel2 = cargarVista(this, "nivel2");
+        
+        ventana.setScene(nivel2);
+        ventana.show();
+    }
+
+    private void configurarEscena3(Stage ventana) {
+        nivel3 = cargarVista(this, "nivel3");
+        
+        ventana.setScene(nivel3);
+        ventana.show();
+    }
+
+    private void configurarEscena4(Stage ventana) {
+        nivel4 = cargarVista(this, "nivel4");
+        
+        ventana.setScene(nivel4);
         ventana.show();
     }
 
@@ -160,5 +149,5 @@ public class ControladorJuego {
             System.exit(-1);
         }
         return vista;
-    }*/
+    }
 }

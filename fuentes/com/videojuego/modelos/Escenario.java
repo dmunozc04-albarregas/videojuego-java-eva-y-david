@@ -7,7 +7,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,11 +62,33 @@ public class Escenario {
                     String parte = partes[j];
                     int cantidad = Integer.parseInt(parte.substring(0, parte.length() - 1));
                     char casilla = parte.charAt(parte.length() - 1);
-                    Rectangle2D recorte = getRecortePorCasilla(casilla);
-
-
                         for (int k = 0; k < cantidad; k++) {
                             ImageView baldosa = new ImageView(imgEscenario);
+                            Rectangle2D recorte;
+
+                            switch(casilla) {
+                                case 'E': recorte = new Rectangle2D(2*LADO, 0*LADO, LADO, LADO);
+                                    espacios += cantidad;
+                                    break;
+                                case 'O': recorte = new Rectangle2D(4*LADO, 2*LADO, LADO, LADO);
+                                    obstaculos += cantidad;
+                                    break;
+                                case 'A': recorte = new Rectangle2D(1*LADO, 5*LADO, LADO, LADO); 
+                                    bordeSuperior += cantidad;
+                                    break;
+                                case 'B': recorte = new Rectangle2D(1*LADO, 3*LADO, LADO, LADO);
+                                    bordeInferior += cantidad;
+                                    break;
+                                case 'I': recorte = new Rectangle2D(2*LADO, 4*LADO, LADO, LADO);
+                                    bordeIzquierdo += cantidad;
+                                    break;
+                                case 'D': recorte = new Rectangle2D(0*LADO, 4*LADO, LADO, LADO);
+                                    bordeDerecho += cantidad;
+                                    break;
+                                default:
+                                    recorte = new Rectangle2D(0, 0, LADO, LADO);
+                                    break;
+                            }
 
                             baldosa.setViewport(recorte);
                             baldosa.setFitWidth(LADO);
@@ -80,21 +101,9 @@ public class Escenario {
                 }
             } catch (IOException e) {
                 e.printStackTrace();            
-        }
+            }
     }
-
-    private Rectangle2D getRecortePorCasilla(char casilla) {
-        switch (casilla) {
-            case 'E': return new Rectangle2D(2*LADO, 0*LADO, LADO, LADO);
-            case 'O': return new Rectangle2D(4*LADO, 2*LADO, LADO, LADO);
-            case 'A': return new Rectangle2D(1*LADO, 5*LADO, LADO, LADO);
-            case 'B': return new Rectangle2D(1*LADO, 3*LADO, LADO, LADO);
-            case 'I': return new Rectangle2D(2*LADO, 4*LADO, LADO, LADO);
-            case 'D': return new Rectangle2D(0*LADO, 4*LADO, LADO, LADO);
-            default: return new Rectangle2D(0, 0, LADO, LADO);  // Casilla por defecto
-        }
-    }
-   
+    
     /**
      * Método con el cuál el jugador aparece en la primera posición del mapa que no sea ni borde ni obstáculo.
      */
@@ -193,9 +202,9 @@ public class Escenario {
             e.printStackTrace();
         }*/
 
-        return true;  
+        return false;  
         }
-        return false; 
+        return true; 
     }    
 
     /**
@@ -241,6 +250,6 @@ public class Escenario {
             return 'D'; // Borde derecho
         } else {
             return ' '; // Caso por defecto (vacío o no reconocido)
-    }
+        }
     }
 }
