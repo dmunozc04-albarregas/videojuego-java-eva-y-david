@@ -3,6 +3,8 @@ javac -g -d compilados --module-path C:/javafx-sdk-24/lib --add-modules javafx.f
 
 javac -g -d compilados --module-path C:\Users\EVA\Desktop\software\javafx-sdk-24\lib --add-modules javafx.fxml,javafx.controls fuentes/com/videojuego/App.java fuentes/com/videojuego/controladores/*.java fuentes/com/videojuego/modelos/*.java
 
+dir /s /b *.java > sources.txt
+
 Copiar FXML
 xcopy "recursos\com\videojuego\" "compilados\com\videojuego\" /E /H /K
 
